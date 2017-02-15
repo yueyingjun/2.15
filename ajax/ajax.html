@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.left,#box{
+			float: left;
+			width: 400px;
+			height: 300px;
+			border: 1px solid #ccc;
+			padding:20px;
+			margin-left: 20px;
+		}
+		input{
+			display: block;
+			margin-bottom: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="left">
+		<input type="text" name="user" id="user">
+		<br>
+		<input type="password" name="pwd" id="pwd">
+		<br>
+		<button id="btn">提交</button>
+	</div>
+	
+	<div id="box"></div>
+</body>
+<script src="ajax.js"></script>
+<script>
+	btn.onclick=function(){
+		var userVal=user.value.replace(/^\s*|\s*$/g,"");
+		var pwdVal=pwd.value.replace(/^\s*|\s*$/g,"");
+		if(!userVal){
+			box.innerHTML="请输入账户名";
+			
+			return;
+		}else{
+			if(!pwdVal){
+				box.innerHTML="请输入密码";
+
+				return;
+			}else{
+				ajax({
+					type:"POST",
+					data:{zh:userVal,mm:pwdVal},
+					url:"1.php",
+					success:function(data){
+						console.log(data);
+						if(data=='0'){
+							box.innerHTML="账号错误";
+							user.value="";
+							return;
+						}else{
+							if(data=='1'){
+								box.innerHTML="密码错误";
+								pwd.value="";
+								return;
+
+							}
+							if(data=='2'){
+								box.innerHTML="登陆成功";
+							}
+						}
+						
+					},
+					error:function(data){
+						console.log(data);
+					}
+				})
+			}
+		}
+		
+		
+	}
+</script>
+</html>

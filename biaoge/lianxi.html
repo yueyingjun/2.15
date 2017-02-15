@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>php</title>
+	<style>
+		#box{
+			width: 500px;
+			height: 500px;
+			border:1px solid red;
+			margin:40PX auto;
+			
+		}
+		table{
+			width: 100%;
+			text-align: center;
+			border-collapse: collapse;
+		}
+		td{
+			width: 33.333%;
+			border: 1px solid #ccc;
+			
+		}
+		tr{
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<div id=box></div>
+	
+
+
+</body>
+<script>
+	window.onload=function(){
+		
+		box.onclick=function(){
+			var ajax=new XMLHttpRequest()||new ActiveXObject("Microsoft.XMLHTTP");
+			ajax.open("get","lianxi1.xml",true);   //因为是get方式，所以name和值连在url上了
+			ajax.send(null);
+			ajax.onreadystatechange=function(){
+				if (ajax.readyState==4) {
+					if (ajax.status==200) {
+						console.log(ajax.responseXML)
+						var dom=ajax.responseXML;
+						var stu=dom.getElementsByTagName("stu");
+//						console.log(stu)
+//						for(var i=0;i<stu.length;i++){
+//							console.log(stu[i].getElementsByTagName("attr"));
+//							for(var j=0;j<stu[i].getElementsByTagName("attr").length;j++){
+//								console.log(stu[i].getElementsByTagName("attr")[j].innerHTML);
+//							}
+//						}
+						var str="<table>";
+						for(var i=0;i<stu.length;i++){
+							str+="<tr>";
+								console.log(stu[i].getElementsByTagName("attr"));
+								for(var j=0;j<stu[i].getElementsByTagName("attr").length;j++){
+									str+="<td>"+stu[i].getElementsByTagName("attr")[j].innerHTML+"</td>";
+									
+								}
+								
+							str+="</tr>";
+						}
+						str+="</table>";
+						box.innerHTML=str;
+					
+					}
+				}
+			}
+
+		}
+	}
+</script>
+</html>
+
+
+
+
+
