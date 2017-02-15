@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+</head>
+<script>
+	window.onload=function(){
+		var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+		var div=document.getElementsByTagName("div")[0];
+		var btn=document.getElementsByTagName("input")[0];
+		btn.onclick=function(){
+			xmlobj.onload=function(){
+				// div.innerHTML=xmlobj.responseXML;
+				var content=xmlobj.responseXML;
+				var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+				var stus=content.getElementsByTagName("stu");
+				for(var i=0;i<stus.length;i++){
+					str+="<tr>";
+					str+="<td>"+stus[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+					str+="<td>"+stus[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+					str+="<td>"+stus[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+					str+="</tr>";
+				}
+				str+="</table>";
+				// document.write(str);
+				div.innerHTML=str;
+			}
+			xmlobj.open("get","1.xml");
+			xmlobj.send();
+		}
+	}
+</script>
+<style>
+	div{
+		width:400px;
+		height:400px;
+		border:1px solid blue;
+	}
+</style>
+<body>
+	<div></div>
+	<input type="button" value="按钮">
+	
+</body>
+</html>
