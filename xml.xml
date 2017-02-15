@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+<stu>
+	<name>小明</name>
+	<age>12</age>
+	<sex>男</sex>
+</stu>
+<stu>
+	<name>张三</name>
+	<age>13</age>
+	<sex>男</sex>
+</stu>
+<stu>
+	<name>李四</name>
+	<age>14</age>
+	<sex>男</sex>
+</stu>
+</root>
