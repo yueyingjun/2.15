@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<stu>
+		<attr class="name">张三</attr>
+		<attr class="age">14</attr>
+		<attr class="sex">男</attr>
+	</stu>
+	<stu>
+		<attr class="name">李四</attr>
+		<attr class="age">16</attr>
+		<attr class="sex">女</attr>
+	</stu>
+	<stu>
+		<attr class="name">王五</attr>
+		<attr class="age">15</attr>
+		<attr class="sex">女</attr>
+	</stu>
+	<stu>
+		<attr class="name">赵六</attr>
+		<attr class="age">19</attr>
+		<attr class="sex">男</attr>
+	</stu>
+	<stu>
+		<attr class="name">田七</attr>
+		<attr class="age">18</attr>
+		<attr class="sex">女</attr>
+	</stu>
+</root>		
+
+
+
+
+
