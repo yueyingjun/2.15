@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	.box{
+		width: 200px;
+		height: 200px;
+		border: 2px solid red;
+	}
+</style>
+<body>
+	<div class="box"></div>
+	<input type="button" value="按钮">
+</body>
+<script>
+	var box=document.getElementsByTagName('div')[0];
+	var btn=document.getElementsByTagName('input')[0];
+	btn.onclick=function(){
+		var xmlobj=new XMLHttpRequest();
+		xmlobj.onload=function(){
+			var content=xmlobj.responseXML;
+			var stus=content.getElementsByTagName("stu");
+			var str="<table><tr><th>姓名</th><th>性别</th><th>年龄</th></tr>"
+			for(var i=0;i<stus.length;i++){
+				str+="<tr>";
+				str+="<td>"+stus[i].getElementsByTagName('name')[0].innerHTML+"</td>"
+				str+="<td>"+stus[i].getElementsByTagName('sex')[0].innerHTML+"</td>"
+				str+="<td>"+stus[i].getElementsByTagName('age')[0].innerHTML+"</td>"
+				str+="</tr>"
+			}
+			str+="</table>"
+			box.innerHTML=str;
+		}
+		xmlobj.open("get","1.xml");
+		xmlobj.send()
+	}
+</script>
+</html>
