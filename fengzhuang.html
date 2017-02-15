@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function ajax(obj){
+				var method=obj.type;
+				var url=obj.url;
+				var dataType=obj.dataType||"text";
+				var asy=obj.asy==undefined?true:obj.asy;
+				var success=obj.success;
+				var error=obj.error;
+				var str="";
+				switch(typeof(obj.data)){//判断传入的data是什么类型
+					case "undefined":break;
+					case "object":
+						for(var i in obj.data){
+							str+=i+"="+obj.data[i]+"&";
+						}
+						str=str.slice(1,-1);
+					break;
+					case "string":
+						str=obj.data;
+					break;
+				}
+				var xmlobj=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHttp");//创建ajax
+				if(method=="get"){//判断是什么方法取值
+					xmlobj.open("get",url+"?"+str,asy);
+					if(dataType=="json"){//要求传出的格式为Json  要将responseType设置为json
+						xmlobj.responseType="json";
+					}
+					if(dataType=="document"){//同理
+						xmlobj.responseType="document";
+					}
+					xmlobj.send();
+				}
+				else if(method=="post"){
+					xmlobj.open("post",url,asy);
+					xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");//设置头部信息
+					xmlobj.send(str);
+				}				
+				xmlobj.onreadystatechange=function(){
+					if(xmlobj.readyState==4){
+						if(xmlobj.status==200){	
+							var result;
+							if(dataType=="xml"){
+								result=xmlobj.responseXML;
+							}
+							if(dataType=="json"){
+								result=eval("("+xmlobj.response+")");
+							}
+							if(dataType=="text"){
+								result=xmlobj.responseText;
+							}
+							if(dataType=="document"){
+								result=xmlobj.response;
+							}
+							if(success){
+								success(result);//成功时  将获取下的值传到Success函数中
+							}
+						}
+						else if(xmlobj.status==404){
+							error()
+						}
+					}
+				}
+			}
+//			ajax({
+//				url:"lianxi.php",
+//				type:"get",
+//				data:{names:"张三",age:12,sex:"男"},
+//				dataType:"document",
+//				success:function(obj){
+//					console.log(obj)
+//				},
+//				error:function(){
+//					console.log("error")
+//				}
+//			})
+		</script>
+	</body>
+</html>
