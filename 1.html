@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		div{
+			width: 300px;
+			height: 300px;
+			border: 1px solid red;
+		}
+	</style>
+	<script>
+		window.onload=function(){			
+			var div=document.getElementsByTagName("div")[0];
+			var blt=document.getElementsByTagName("input")[0];	
+			blt.onclick=function(){
+				var xmlobj=new XMLHttpRequest();				
+				xmlobj.onload=function(){				
+					var content=xmlobj.responseXML;
+					var stus=content.getElementsByTagName("stu");
+					var str="<table>"
+							str+="<tr><th>姓名</th><th>年龄</th><th>性别</th></tr>"
+						for(var i=0;i<stus.length; i++){							
+							str+="<tr><td>"+stus[i].getElementsByTagName("name")[0].innerHTML+"</td><td>"+stus[i].getElementsByTagName("age")[0].innerHTML+"</td><td>"+stus[i].getElementsByTagName("name")[0].innerHTML+"</td></tr>"				
+						}
+						str+="</table>"	
+						div.innerHTML=str;
+				}
+				xmlobj.open("get","1.xml");
+				xmlobj.send()
+
+//				ajax({
+//					url:"1.xml",
+//					type:"get",
+//					data:"",
+//					dataType:"xml",
+//					success:function(){
+//						alert(1);
+//					},
+//					error:function(){
+//						alert(2);
+//					}
+//				})
+				
+			}			
+		}
+		function ajax(obj){
+			var type=obj.type||"get";
+			var url=obj.url;
+			var dataType=obj.dataType||"text";
+			var success=obj.success;
+			var data="";
+			var xmlobj=window. XMLHttpRequest? new XMLHttpRequest():new ActiveXObjict("Microsoft.XMLHTTP");			
+				xmlobj.onload=function(){
+					var content;
+					if(obj.dataType){
+						if(dataType=="json"){
+							content=xmlobj.responseJSON;
+						}else if(dataType=="text"){
+							content=xmlobj.responseText;
+						}else if(dataType=="xml"){
+							content=xmlobj.responseXML;
+						}
+						obj.success();
+					}else{
+						obj.error()
+					}
+					
+				}
+			if(type=="post"){                  
+				xmlobj.open("post",url)
+				xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				xmlobj.send(data);
+			}else if(type=="get"){
+				xmlobj.open("get",url+"?"+data);
+				xmlobj.send();
+			}			
+		}
+		
+	</script>
+	<body>
+		<div></div>
+		<input type="button" value="按钮"/>
+	</body>
+</html>
