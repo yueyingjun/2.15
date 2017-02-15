@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax2</title>
+</head>
+<body>
+    <div style="width: 200px;height: 200px;border: 1px solid darkred"></div>
+    <button>按钮</button>
+</body>
+</html>
+<script>
+
+    var xmlobj = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject('Microsoft.XMLHTTP'); // 处理兼容
+    xmlobj.onreadystatechange=function () {     // 建立异步监听函数
+        var div=document.getElementsByTagName('div')[0];
+        var btn=document.getElementsByTagName('button')[0];
+        btn.onclick=function () {
+            if(xmlobj.readyState==4&&xmlobj.status==200){
+                    var xml=xmlobj.responseXML;
+                    var str=xml.getElementsByTagName('stu');
+                    var tas='<table><tr><th>姓名</th><th>性别</th></tr>';
+                    for(var i =0;i<str.length;i++){
+                        var names=str[i].getElementsByTagName('name')[0];
+                        var ages=str[i].getElementsByTagName('age')[0];
+                        tas+='<tr>';
+                        tas+='<td>'+names.innerHTML+'</td>';
+                        tas+='<td>'+ages.innerHTML+'</td>';
+                        tas+='</tr>';
+                    }
+                    tas+='</table>';
+                    div.innerHTML=tas;
+            }
+        }
+    };
+    xmlobj.open('get','XML.xml',true);
+    xmlobj.send();      // 发送请求
+
+</script>
