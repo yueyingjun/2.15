@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="ajax.js"></script>
+	<style>
+		div{
+			width: 300px;height: 300px;
+			border: 1px solid #000;
+		}
+	</style>
+	<body>
+		<div></div>
+	</body>
+	<script>
+		var box=document.getElementsByTagName("div")[0];
+		box.onclick=function(){
+			ajax({
+				url:"1.php",
+//				method:"get",
+//				asynch:true,
+				dataType:"document",
+				success:function(text){
+					console.log(text);
+				}
+			})
+		}
+	</script>
+</html>
