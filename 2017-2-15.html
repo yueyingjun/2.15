@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+<script>function ajax(obj){
+	//1.定义
+	var data="";
+	var dataType=obj.dataType||"text"
+	var method=obj.method||"get"
+	var asynch=obj.asynch==undefined?true:obj.asynch;
+	var success=obj.success;
+	var url=obj.url;
+	var error=obj.error;
+	//2.判断对象类型
+	switch(typeof(obj.data)){
+		case "undefined":;break;
+		case "object":for(var i in obj.data){
+			data+=i+"="+obj.data[i]+"&";
+		}data=data.slice(0,-1)
+		;break;
+		case "string":data=obj.data;break;
+	}
+	//3.判断传输方式
+	var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP")
+		if (method=="get") {
+			ajax.open("get",url+"?"+data,asynch)
+			ajax.send(null)
+		}
+		else if(method=="post"){
+			ajax.open("post",url,asynch)
+			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+			ajax.send(data)
+		}
+	//4.判断是否成功
+	ajax.onreadystatechange=function(){
+	if(ajax.readyState==4){
+		if(ajax.status==200){
+			var result;
+			switch(dataType){
+				case "text":
+					result=ajax.responseText;
+				break;
+				case "xml":
+					result=ajax.responseXML;	
+				break;
+				case "json":
+					result=eval("("+ajax.response+")");
+				break;
+				case "document":
+					result=eval("("+ajax.response+")")
+			}
+			if(success){
+				success(result)
+			}
+		}else if(ajax.status==404){
+			error("页面没有找到")
+		}else{
+			error("获取错误")
+		}
+	}
+	}
+}
+
+window.onload=function(){
+	var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP")
+	var btn=document.querySelectorAll("div")[0]
+	var box=document.querySelectorAll("button")[0]
+	box.onclick=function(){
+		var le;
+		ajax({
+			method:"get",
+			url:"1.xml",
+			dataType:"xml",
+			asynch:true,
+			success:function(xml) {
+					 	le=xml
+					  	var str="<table>"
+					str+="<tr><td>姓名</td><td>年龄</td><td>性别</td></tr>"
+					console.log(le)
+					var trd=le.getElementsByTagName("stu")
+					for (var i = 0; i < trd.length; i++) {
+						str+="<tr>"
+						str+="<td>"
+						str+=trd[i].getElementsByTagName("name")[0].innerHTML
+						str+="</td>"
+						str+="<td>"
+						str+=trd[i].getElementsByTagName("age")[0].innerHTML
+						str+="</td>"
+						str+="<td>"
+						str+=trd[i].getElementsByTagName("sex")[0].innerHTML
+						str+="</td>"
+						str+="</tr>"
+					};
+					str+="</table>"
+					console.log(str)
+					btn.innerHTML=str
+		}
+	})
+}
+}
+</script>
+<style>
+	div{
+		width: 100px;
+		height: 100px;
+		border: 1px solid black
+	}
+	table{
+		font-size: 10px;
+	}
+</style>
+</head>
+<body>
+	<div>
+		
+	</div>
+	<button>按钮</button>
+</body>
+</html>
