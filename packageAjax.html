@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>封装Ajax</title>
+		<script src="packageAjax.js"></script>
+	</head>
+	<style>
+		div{
+			width: 200px;
+			height: 200px;
+			border:2px solid red;
+		}
+	</style>
+	<body>
+		<div></div>
+	</body>
+</html>
+	<script>
+	window.onload=function(){
+		var box=document.getElementsByTagName('div')[0];
+		box.onclick=function(){
+			ajax({
+				method:"get",
+				url:"packageAjax.php",
+				data:"aa=bb&cc=dd",
+				dataType:"text",
+				success:function(text){
+					box.innerHTML=text;
+				}
+			})
+		}
+	}
+	
+	</script>
