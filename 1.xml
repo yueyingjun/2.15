@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    
+    <stu>
+        <name>赵钱</name>
+        <age>12</age>
+        <sex>男</sex>
+    </stu>
+    <stu>
+        <name>孙李</name>
+        <age>13</age>
+        <sex>女</sex>
+    </stu>
+    <stu>
+        <name>周吴</name>
+        <age>14</age>
+        <sex>男</sex>
+    </stu>
+    <stu>
+        <name>郑王</name>
+        <age>35</age>
+        <sex>女</sex>
+    </stu>
+    <stu>
+        <name>冯陈</name>
+        <age>23</age>
+        <sex>男</sex>
+    </stu>
+
+</root>
