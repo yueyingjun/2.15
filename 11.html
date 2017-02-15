@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	.box{
+		width: 300px;
+		height: 300px;
+		border: 1px solid red;
+		margin: 30px auto;
+	}
+	input{
+		display: block;
+		margin: 10px auto;
+	}
+</style>
+<body>
+<script>
+	
+	window.onload=function(){
+		var input = document.getElementsByTagName('input')[0];
+		var box = document.getElementsByTagName('div')[0];
+		var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+		input.onclick=function(){
+			xmlobj.onload=function(){
+				var content=xmlobj.responseXML;
+				var str="<table><tr><td>姓名</td><td>年龄</td><td>性别</td></tr>";
+				var stu=content.getElementsByTagName('stu');
+				for(var i=0;i<stu.length;i++){
+					str+="<tr><td>"+stu[i].getElementsByTagName('name')[0].innerHTML+"</td>";
+					str+="<td>"+stu[i].getElementsByTagName('age')[0].innerHTML+"</td>";
+					str+="<td>"+stu[i].getElementsByTagName('sex')[0].innerHTML+"</td></tr>";
+				}
+				str+="</table>"
+				// document.write(str);
+				box.innerHTML=str;
+			}
+			xmlobj.open("get","11.xml");
+			xmlobj.send();
+		}
+	}
+</script>
+	<div class="box"></div>
+	<input type="button" value="按钮">
+</body>
+</html>
