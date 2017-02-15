@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+		<style>
+			.box{
+				width:200px;
+				height: 200px;
+				background: yellow;
+				
+			}
+		</style>
+	<body>
+		<div class="box"></div>
+		<input type="button" name="" id="" value="按钮" />
+	</body>
+<script>
+window.onload=function(){
+var btn=document.getElementsByTagName("input")[0];
+ btn.onclick=function(){
+	ajax({
+		method:"get",
+		url:"log.php",
+		data:{"name":"zhangsan"},
+		dataType:"text",
+		success:function(con){
+//        if(con){console.log("成功")}else{console.log("失败")}
+        console.log(con)
+		}
+		
+	})
+}
+}
+
+
+
+	function ajax(obj){
+		var result;
+			var method=obj.method||"get";
+			var url=obj.url;
+			var data="";
+			var dataType=obj.dataType||"text";
+			var success=obj.success;
+			switch(typeof(obj.data)){
+				case "undefined":break;
+				case "object": for(var i in obj.data){
+					                 data+=i+"="+obj.data[i]+"&";				                
+				                }
+				                data=data.slice(0,-1);
+				                break;
+				case "string":data=obj.data;   
+				             break;
+			}
+			var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+			if(method=="get"){
+				ajax.open("get",url+"?"+data,true);
+				ajax.send(null);
+			}else if(method=="post"){
+				ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				ajax.open("post",url,true);
+				ajax.send(data);
+			}
+			ajax.onreadystatechange=function(){
+				if(ajax.readyState==4){
+					if(ajax.status==200){
+						
+						switch(dataType){//有4种数据类型
+							case "text":
+							result=ajax.responseText;
+							break;
+							case "xml":
+							result=ajax.responseXML;
+							break;
+							case "document":
+							result=ajax.response;
+							break;
+							case "json":
+							result=eval("("+ajax.response+")")	//eval将字符串转化为js						
+							break;							
+						}
+						if(success){
+							success(result);
+						}
+					}else if(ajax.status==404){
+						alert("页面未找到");
+					}else{
+						alert("请求错误");
+					}
+				}
+			}
+			
+			
+			
+			
+			
+	}
+		
+		
+		
+</script>
+	
+	
+</html>
