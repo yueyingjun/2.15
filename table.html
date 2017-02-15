@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+		#btn{
+			margin: 0 auto;
+			width: 80px;
+			height: 40px;
+			background: #f00;
+			border-radius: 5px;
+			line-height: 40px;
+			text-align: center;
+			color: #fff;
+			cursor: pointer;
+			font-weight: 500;
+			font-family: "微软雅黑";
+			margin-top: 10px;
+		}
+		.box{
+			margin: 0 auto;
+			margin-top: 100px;
+			width: 300px;
+			height: 247px;
+			border: 1px solid #f00;
+		}
+		table{
+			border: 1px solid #000;
+			border-collapse: collapse;
+		}
+		th{
+			background: paleturquoise;
+		}
+		td,th{
+			border: 1px solid #000;
+			width: 100px;
+			height: 40px;
+			text-align: center;
+		}
+	</style>
+	<body>
+		<div class="box"></div>
+		<div id="btn">获取</div>
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			var box=document.getElementsByClassName("box")[0];
+			var btn=document.getElementById("btn");
+//			btn.onclick=function(){
+//				var xmlobj=window.XMLHttpRequest?	//兼容创建XMLHttpRequest
+//				new XMLHttpRequest():ActiveXObject("Micrsoft.XMLHTTP");
+//				xmlobj.onload=function(){			//传输完成后执行的事件
+//					box.innerHTML=xmlobj.response;	//reponse ajax返回的信息
+//				}
+////				xmlobj.open("get","day1.php?name=zhouxiaohao");		//get传输方式
+////				xmlobj.send();
+//				xmlobj.open("post","day1.php");						//post传输方式
+//				xmlobj.setRequestHeader("Content-Type",
+//				"application/x-www-form-urlencoded");				//设置编码方式，需要放在open下
+//				xmlobj.send("name=zhouxiaohao&age=12");				//要传输数据放在send中
+//			}
+			btn.onclick=function(){
+				var xmlobj=window.XMLHttpRequest?	//兼容创建XMLHttpRequest
+				new XMLHttpRequest():ActiveXObject("Micrsoft.XMLHTTP");
+				xmlobj.onload=function(){
+					var con=xmlobj.responseXML;
+					var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>"
+					var trs=con.getElementsByTagName("stu");
+					for(var i=0;i<trs.length;i++){
+						str+="<tr>";
+						str+='<td>'+trs[i].getElementsByTagName("name")[0].innerHTML+'</td><td>'+trs[i].getElementsByTagName("age")[0].innerHTML+'</td><td>'+trs[i].getElementsByTagName("sex")[0].innerHTML+'</td>'
+						str+="</tr>";
+					}
+					str+="</table>"
+					box.innerHTML=str;
+				}
+				xmlobj.open("post","table.xml");//post传输方式
+//				xmlobj.responseType="text";	//设置返回值的类型 json document arraybuffer bolb(二进制) text
+				xmlobj.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded");				//设置编码方式，需要放在open下
+				xmlobj.send();		
+			}
+			
+		}
+	</script>
+</html>

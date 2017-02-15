@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax函数封装</title>
+	</head>
+	<script type="text/javascript" src="ajax.js"></script>
+	<style>
+		
+	</style>
+	<body>
+		
+	</body>
+	<script>
+		ajax({
+			type:"post",
+			url:"ceshi.html",
+			dataType:"document",
+			asynsh:true,
+			data:"name=whb&age=23",
+			success:function(res){
+				console.log(res);
+			},
+			error:function(str){
+				console.log(str);
+			},
+			selector:"h1"
+		})
+		
+	</script>
+</html>
