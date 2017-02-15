@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="封装ajax.js"></script>
+	</head>
+	<style type="text/css">
+		div{
+			width:300px;
+			height: 300px;
+			border: 1px solid #444;
+		}
+	</style>
+	<body>
+		<div>
+			
+		</div>
+		<input type="button" name="" id="" value="单击" />
+	</body>
+	<script type="text/javascript">
+		var div=document.getElementsByTagName("div")[0];
+		var btn=document.getElementsByTagName("input")[0];
+		var data1={name:"zhang",age:18,sex:"男"}
+		btn.onclick=function(){
+			ajax({
+				url:"1.xml",
+				data:data1,
+				dataType:"document",
+				success:function(res){
+					console.log(res);
+				},
+				error:function(){
+					console.log(1)
+				}
+			})
+		}
+	</script>
+</html>
