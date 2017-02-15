@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<script>
+window.onload=function(){
+
+
+	var btn=document.getElementsByTagName('input')[0];
+	var div=document.getElementsByTagName('div')[0];
+
+	btn.onclick=function() {
+		var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+		ajax.open("post","1.xml"); 
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlIencoted"); 
+		ajax.send()
+		ajax.onload=function(){
+			//ajax.responseType="json"
+			//ajax.responseType="text"
+			//ajax.responseType="arraybuff"
+			//ajax.responseType="document"
+
+			var content=ajax.responseXML
+			var str=("<table width='200' height='200' border='1''>")
+			str+="<td>"+"姓名"+"</td>"
+			str+="<td>"+"年龄"+"</td>"
+			str+="<td>"+"性别"+"</td>"
+			for(var i =0;i<4;i++){
+					str+="<tr>"
+						str+=("<td>"+content.getElementsByTagName('name')[i].innerHTML+"</td>")
+						str+=("<td>"+content.getElementsByTagName('age')[i].innerHTML+"</td>")
+						str+=("<td>"+content.getElementsByTagName('sex')[i].innerHTML+"</td></tr>")
+				
+			}
+			str+=("</table>")
+			div.innerHTML=str;
+		}
+		
+	}
+
+}
+</script>
+<style>
+table{
+	text-align: center;
+	border-collapse:collapse
+
+}
+	div{
+		width: 200px;
+		height: 200px;
+		border: 1px solid black;
+	}
+</style>
+<body>
+	<div></div>
+	<input type="button" name="sub" value="按钮">
+</body>
+</html>
