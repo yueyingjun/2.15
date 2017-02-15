@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<table>
+	<stu>
+		<name>李雅洁</name>
+		<age>22</age>
+		<sex>女</sex>
+	</stu>
+	<stu>
+		<name>刘心如</name>
+		<age>24</age>
+		<sex>女</sex>
+	</stu>
+	<stu>
+		<name>郭鑫</name>
+		<age>24</age>
+		<sex>男</sex>
+	</stu>
+</table>
