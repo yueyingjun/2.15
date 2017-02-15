@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<str>
+		<name>贝克汉姆</name>
+		<age>18</age>
+		<sex>男</sex>
+	</str>
+	<str>
+		<name>穆勒</name>
+		<age>18</age>
+		<sex>男</sex>
+	</str>
+	<str>
+		<name>齐达内</name>
+		<age>18</age>
+		<sex>男</sex>
+	</str>
+	<str>
+		<name>布冯</name>
+		<age>18</age>
+		<sex>男</sex>
+	</str>
+</root>
