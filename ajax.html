@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<style>
+		div{
+			width:300px;
+			height: 300px;
+			border: 1px solid #000;
+			/*text-align: center;*/
+			/*font-size: 50px;
+			line-height: 300px;*/
+			font-weight: bold;
+			font-family: "宋体";
+		}
+	</style>
+	<script type="text/javascript">
+		//返回的数据是xmldocumentobj，很少使用
+		//返回的类型  text
+		//ajax的核心对象XMLHttpRequest();
+	
+		window.onload=function(){
+			var div=document.getElementsByTagName('div')[0];
+			var btn=document.getElementsByTagName('input')[0];
+			
+			btn.onclick=function(){
+				var xmlobj=new XMLHttpRequest();
+				xmlobj.onload=function(){
+					var xml=xmlobj.responseXML;
+					console.log(xml)
+					var stu=xml.getElementsByTagName("stu");
+
+					var str="<table>";
+						str+="<tr><td>"+"名字"+"</td><td>"+"年龄"+"</td><td>"+"性别"+"</td></tr>";
+						for(var i=0; i<stu.length; i++){
+							str+="<tr><td>"+stu[i].getElementsByTagName('name')[0].innerHTML+"</td><td>"+stu[i].getElementsByTagName('age')[0].innerHTML+"</td><td>"+stu[i].getElementsByTagName('sex')[0].innerHTML+"</td></tr>";
+						}
+						
+					str+="</table>";
+					div.innerHTML=str;
+				}
+				 xmlobj.open("get","ajax.xml");
+				 xmlobj.send();
+			}
+			
+		}
+	</script>
+	<body>
+		<div></div>
+		<input type="button" name="" id="" value="按钮" />
+	</body>
+</html>
