@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="ajax.js"></script>
+	<script type="text/javascript">
+		window.onload=function(){
+			var btn=document.querySelector("input");
+			var box=document.querySelector("div");
+		//get 获取
+//			btn.onclick=function(){
+//				var xmlobj=new XMLHttpRequest();
+//				xmlobj.onload=function(){
+//					box.innerHTML=xmlobj.response;
+//				}
+//				xmlobj.open("get","no1-1.php?username=zhangsan&age=22");
+//				xmlobj.send()
+//			}
+		//post 获取
+			btn.onclick=function(){
+//				var xmlobj=new XMLHttpRequest();
+//				xmlobj.onload=function(){
+//					var content=xmlobj.responseXML;
+//					var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>"
+//					var stu=content.getElementsByTagName("stu");
+//					for (var i=0;i<stu.length;i++) {
+//						str+="<tr><td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td><td>"+stu[i].getElementsByTagName("age")[0].innerHTML+"</td><td>"+stu[i].getElementsByTagName("sex")[0].innerHTML+"</td></tr>"
+//					}
+//					str+="</table>";
+//					box.innerHTML=str;
+//				}
+//				xmlobj.open("post","no1-1.xml");
+//				xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+//				xmlobj.send();
+				
+				ajax({
+					type:"post",
+					url:"no1-1.xml",
+					dataType:"xml",
+					success:function(content){
+						var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>"
+					var stu=content.getElementsByTagName("stu");
+					for (var i=0;i<stu.length;i++) {
+						str+="<tr><td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td><td>"+stu[i].getElementsByTagName("age")[0].innerHTML+"</td><td>"+stu[i].getElementsByTagName("sex")[0].innerHTML+"</td></tr>"
+					}
+					str+="</table>";
+					box.innerHTML=str;
+					}
+				})
+			}
+		}
+	</script>
+	<style type="text/css">
+		div{
+			width: 240px;
+			height: 257px;
+			margin: 0 auto;
+			margin-top: 50px;
+			border:1px solid red;
+		}
+		input{
+			width: 60px;
+			height: 30px;
+			display: block;
+			border-radius: 4px;
+			color: #fff;
+			font-size: 20px;
+			text-align: center;
+			line-height: 30px;
+			background: hotpink;
+			margin: 10px auto;
+		}
+		table{
+			border: 1px solid red;
+			border-collapse: collapse;
+		}
+		th,td{
+			width: 80px;
+			height: 40px;
+			border: 1px solid red;
+			text-align: center;
+			color:deeppink;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<input type="button" value="转换"/>
+</body>
+</html>
