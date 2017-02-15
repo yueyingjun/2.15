@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="ajax.js"></script>
+	<style>
+		div{
+			width: 200px;
+			height: 200px;
+			border: 1px solid red;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var div=document.getElementsByTagName("div")[0];
+			var btn=document.getElementsByTagName("input")[0];
+			btn.onclick=function(){
+				var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():
+				new ActiveXObject("Microsoft.XMLHTTP");
+				xmlobj.onreadystatechange=function(){
+					if(xmlobj.readyState==4){
+						if(xmlobj.status==200){
+							div.innerText=xmlobj.response;
+                            var xml=xmlobj.responseXML;
+                            var xin=xml.getElementsByTagName("xin");
+                            var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+                            for(var i=0;i<xin.length;i++){
+                            	str+="<tr>";
+                            	str+="<td>"+xin[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+                            	str+="<td>"+xin[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+                            	str+="<td>"+xin[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+                            	str+="</tr>";
+                            }
+                            str+="</table>";
+                            div.innerHTML=str;
+						}
+					}
+				}
+//				xmlobj.open("get","2.15.php?name=zhangsan&");
+				xmlobj.open("post","1.xml");
+				xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				xmlobj.send("name=zhangsan");
+			}
+		}		
+	</script>
+	<body>
+		<div></div>
+		<input type="button" value="复制" />
+	</body>
+</html>
