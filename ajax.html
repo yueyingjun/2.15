@@ -1,0 +1,108 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		div{
+			width: 200px;
+			height: 200px;
+			border: 1px solid red;
+		}
+		
+	</style>
+	<body>
+		<div>
+			
+		</div>
+		<input type="button" value="按钮" />
+	</body>
+	<script>
+	//1。 获取 XMLHttprequest 对象   ie8 以下的浏览器没有这个对象  用 new ActiveXObject("Microsoft.XMLHTTP")
+//	var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+	// 2.open 五个参数  方式   地址   异步  帐号  密码 ,  一般情况下 不用写后面三个
+	//ajax.open("get","index.html");
+	 /*
+	 *  同步   异步
+	 *  javascript 是一种单线程异步机制的语言；
+	 * 
+	 * 异步  （所有不能够及时完成的动作，都是异步）
+	 * 	    1. 时间控制的， setTimeout
+	 * 
+	 * 	    2. 事件控制的 window.onload
+	 * 
+	 * 	
+	 * 1. 如何通过ajax去获取信息
+	 * 	  get post
+	 * 
+	 * 2. 如何去传递信息
+	 * 	         
+	 * 
+	 *  
+	 * */
+	// 3.
+//	ajax.onreadystatechange=function(){
+//		if(ajax.readState==4){
+//			if(ajax.status==200){
+//				console.log(ajax.response)
+//			}else if(ajax.status==404){
+//				
+//			}
+//		}else if(ajax.readyState==3){
+//			
+//		}
+//	}
+//	ajax.onload=function(){
+//		console.log(ajax.response)
+//	}
+//	ajax.open("get","html1.html");
+//	
+//	ajax.send();
+//window.onload=function(){
+//	var box=document.getElementsByTagName("div")[0];
+//	var btn=document.getElementsByTagName("input")[0];
+//	btn.onclick=function(){
+//		var ajax=new XMLHttpRequest();
+//		ajax.onload=function(){
+//			if(ajax.readyState==4){
+//				if(ajax.status==200){
+//					box.innerHTML=ajax.response;
+//				}else if(ajax.status==404){
+//					
+//				}
+//			}else{
+//				
+//			}
+//		}
+//		ajax.open("get","ajax.php?name=zhangsan");
+//		ajax.send()
+//	}
+//
+//}
+window.onload=function(){
+	var box=document.getElementsByTagName("div")[0];
+	var btn=document.getElementsByTagName("input")[0];
+	btn.onclick=function(){
+		var ajax=new XMLHttpRequest();
+		ajax.onload=function(){
+			var content=ajax.responseXML;
+			var stus=content.getElementsByTagName("stu");
+		
+			var str="<table><tr><th>名字</th><th>年龄</th><th>性别</th></tr>";
+			
+			for(var i=0;i<stus.length;i++){
+				str+="<tr><th>"+content.getElementsByTagName("name")[i].innerHTML+"</th>";
+				str+="<th>"+content.getElementsByTagName("age")[i].innerHTML+"</th>";
+				str+="<th>"+content.getElementsByTagName("sex")[i].innerHTML+"</th></tr>";
+			}
+			str+="</table>"
+			document.body.innerHTML=str;
+		}
+		ajax.open("get","1.xml");
+		ajax.send( );
+	}
+
+}
+	</script>
+</html>
