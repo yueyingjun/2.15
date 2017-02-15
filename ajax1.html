@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ajax.xml</title>
+		<style>
+			div{
+				width: 200px;
+				height: 200px;
+				border: 2px solid aqua;
+				margin:0 auto;
+				margin-top: 100px;
+			}
+			input{
+				width: 50px;
+				height: 30px;
+				text-align: center;
+				line-height: 30px;
+				float: left;
+				margin: 0 570px;
+			}
+		</style>
+		<script>
+			window.onload=function(){
+				var box=document.getElementsByTagName("div")[0];
+				var btn=document.getElementsByTagName("input")[0];
+				btn.onclick=function(){
+					var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+					xmlobj.onreadystatechange=function(){
+						if(xmlobj.readyState==4){
+							if(xmlobj.status==200){
+								var concent=xmlobj.responseXML;
+								var str="<table>";
+								str+="<tr><th>名字</th><th>年龄</th><th>性别</th></tr>";
+								var trs=concent.getElementsByTagName("stu");
+								for (var i = 0; i < trs.length; i++) {
+									str+="<tr>";
+										str+="<td>"+trs[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+										str+="<td>"+trs[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+										str+="<td>"+trs[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+									str+="</tr>";
+								};
+								str+="</table>";
+								box.innerHTML=str;
+							}else if(xmlobj.status==404){
+								box.innerHTML="未找到";
+							}
+						}
+					}
+					xmlobj.open("get","1.xml",true)
+					xmlobj.send()
+
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div></div>
+		<input type="button" name="btn" id="btn" value="按钮" />
+	</body>
+</html>
