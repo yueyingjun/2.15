@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>ajax</title>
+</head>
+<script>
+
+
+window.onload=function(){
+	var div=document.getElementsByTagName("div")[0];
+	var inputer=document.getElementsByTagName("input")[0];
+	var aa=new XMLHttpRequest();
+	aa.overrideMimeType("text/XML"); 
+	aa.open("post","1.xml");
+	aa.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	aa.send();
+	aa.onload=function(){
+		inputer.onclick=function(){
+			var content=aa.responseXML;
+			console.log(content)
+			var tr=content.getElementsByTagName("stu");
+			var str="<table cellspacing=0><th><tr><td class='first one'>名字</td><td class='one'>年龄</td><td class='one'>性别</td></tr></th>";
+			for (var i=0;i<tr.length;i++) {
+				str+="<tr><td class='first'>"+content.getElementsByTagName("name")[i].innerHTML+"</td><td>"+content.getElementsByTagName("age")[i].innerHTML+"</td><td>"+content.getElementsByTagName("sex")[i].innerHTML+"</td></tr>"
+			}
+			str+="</table>";
+			document.body.innerHTML=str;
+		}
+	}
+}
+
+
+
+</script>
+<style>
+	input{
+		margin: 100px 100px;
+	}
+	table{
+		width: 400px;
+		margin: 10px auto;
+	}
+	tr{
+		width: 400px;
+		height: 40px;
+		line-height: 40px;
+		font-size: 14px;
+		text-align: center;
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+	td{
+		width: 33.3%;
+		height: 40px;
+		border-right: 1px solid black;
+		border-bottom: 1px solid black;
+		margin: 0;
+		padding: 0;
+	}
+	.first{
+		border-left: 1px solid black;
+	}
+	.one{
+		border-top: 1px solid black;
+	}
+</style>
+<body>
+	<input type="button" value="提交"/>
+</body>
+</html>
