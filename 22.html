@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		div{
+			width: 200px;height: 200px;
+			border: 1px solid red;
+		}
+	</style>
+	<body>
+		<div></div>
+		<input type="button" value="按钮" />
+		<input type="button" value="停止" />
+	</body>
+	<script>
+		window.onload=function(){
+			var div = document.getElementsByTagName('div')[0];
+			var button = document.getElementsByTagName('input')[0];
+			var stop = document.getElementsByTagName('input')[1];
+//			stop.onclick=function(){        停止请求
+//				xmlobj.abort();
+//			}
+//			xmlobj.onabort=function(){
+//				div.innerHTML="请求停止";
+//			}
+			button.onclick=function(){
+				var xmlobj = window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+				xmlobj.onreadystatechange=function(){
+					xmlobj.onload=function(){
+						//div.innerHTML=xmlobj.response;
+						//div.innerHTML=xmlobj.responseXML;   //获取XML文档对象
+						var content=xmlobj.responseXML;   
+						var str="<table><tr><th>名字</th><th>年龄</th><th>性别</th></tr>";
+						var trs=content.getElementsByTagName("stu");	
+						for(var i=0;i<trs.length;i++){
+							str+="<tr>"
+							str+="<td>"+trs[i].getElementsByTagName("name")[0].innerHTML+"</td>"
+							str+="<td>"+trs[i].getElementsByTagName("age")[0].innerHTML+"</td>"
+							str+="<td>"+trs[i].getElementsByTagName("sex")[0].innerHTML+"</td>"
+							str+="</tr>"
+						}
+						str += "</table>";
+						div.innerHTML=str;
+					}
+//					xmlobj.onloadstart=function(){        请求成功前
+//						console.log("start")
+//					}
+//					xmlobj.onloadend=function(){        请求成功后
+//						console.log("end")
+//					}
+				}
+//			get方式   传递数据要写在路径之后xmlobj.open("get","ajax.xml?name=zhangsan");
+				xmlobj.open("get","ajax.xml");
+				//xmlobj.responseType="json"||"text"|"document"||"arraybuffer"||"bolb"    返回的几种类型，设置返回格式要写在open之后  
+				//xml格式不写在这里要写在responseXML
+				xmlobj.send();
+//			post方式    注意要写头信息，传递的数据要写在send里，头信息要写在open后
+//				xmlobj.open("post","ajax.php");
+//				xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+//				xmlobj.send("name=zhangsan");
+			}
+			
+		}
+	</script>
+</html>
