@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax</title>
+	<style>
+	*{
+		margin:0;
+		padding:0;
+	}
+		div{
+			width: 200px;
+			height: 200px;
+			border:1px solid #f00;
+		}
+	</style>
+</head>
+<body>"
+	<div>
+		
+	</div>
+	<input type="button" value="提交">
+</body>
+<script>
+// get方式
+	// var xmlobj=new XMLHttpRequest();
+	// var btn=document.getElementsByTagName("input")[0];
+	// var div=document.getElementsByTagName("div")[0];
+	// btn.onclick=function(){
+	// 	xmlobj.onreadystatechange=function(){
+	// 		if(xmlobj.readyState==4){
+	// 			if(xmlobj.status==200){
+	// 				div.innerHTML=xmlobj.response;
+	// 			}
+	// 		}
+	// 	}
+	// 	xmlobj.open("get","ajax.php?name=zhangsan&pass=123456");
+	// 	xmlobj.send();
+	// }
+
+
+	// post方式
+	// var xmlobj=new XMLHttpRequest();
+	// console.log(xmlobj)
+	// var btn=document.getElementsByTagName("input")[0];
+	// var div=document.getElementsByTagName("div")[0];
+	// btn.onclick=function(){
+	// 	xmlobj.onreadystatechange=function(){
+	// 		if(xmlobj.readyState==4){
+	// 			if(xmlobj.status==200){
+	// 				div.innerHTML=xmlobj.response;
+	// 			}
+	// 		}
+	// 	}
+	// 	xmlobj.open("post","ajax.php");
+	// 	xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	// 	xmlobj.send("name=zhangsan&pass=123456");
+	// }
+// 作业1.
+var xmlobj=new XMLHttpRequest();
+	// console.log(xmlobj)
+	var btn=document.getElementsByTagName("input")[0];
+	var div=document.getElementsByTagName("div")[0];
+	btn.onclick=function(){
+		xmlobj.onreadystatechange=function(){
+			if(xmlobj.readyState==4){
+				if(xmlobj.status==200){
+					var content=xmlobj.responseXML;
+					// console.log(content)
+					var stus=content.getElementsByTagName("stu");
+					var str="<table><tr><th>学生</th><th>性别</th></tr>";
+						for(var i=0;i<stus.length;i++){
+							str+="<tr><td>"+stus[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+							str+="<td>"+stus[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+							str+="<td>"+stus[i].getElementsByTagName("sex")[0].innerHTML+"</td></tr>";
+						}
+					str+="</table>";
+					document.body.innerHTML=str;
+				}
+			}
+		}
+		xmlobj.open("post","ajax.xml");
+		xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		xmlobj.send();
+	}
+
+
+
+// XMLHttpRequest 属性、方法
+// onabort   停止事件
+
+// onerror
+
+// onload    加载中
+
+// onloadend	结束请求
+
+// onloadstart  开始请求
+
+// onprogress
+
+// onreadystatechange
+
+// ontimeout
+
+// readyState
+
+// response
+
+// responseText   返回文本
+
+// responseType  返回类型 设置在open后面设置  json
+
+// responseURL  返回地址
+
+// responseXML  接受对象
+
+// abort（）停止请求    方法   sleep(2) 时间
+</script>
+</html>
