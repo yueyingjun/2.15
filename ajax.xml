@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<header>
+   <person>
+   	<name>魏海春</name>
+   	<age>18</age>
+   	<sex>男</sex>
+   </person>
+   <person>
+   	<name>魏海春</name>
+   	<age>18</age>
+   	<sex>男</sex>
+   </person>   
+   <person>
+   	<name>赵海春</name>
+   	<age>18</age>
+   	<sex>男</sex>
+   </person>   
+   <person>
+   	<name>钱海春</name>
+   	<age>18</age>
+   	<sex>男</sex>
+   </person>   
+   <person>
+   	<name>孙海春</name>
+   	<age>18</age>
+   	<sex>男</sex>
+   </person>
+</header>
