@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+	function ajax(obj){
+		var menthod=obj.menthod||"get";
+		var	url=obj.url;
+		var data=obj.data;
+		var datatype=obj.datatype||"text";
+		var asy=obj.asy==="undefined"?true:obj.asy;
+		var str="";
+		var sucess=obj.sucess;
+		var error=obj.error;
+		switch(typeof data){
+			case "undefined": 
+					data=null;
+			break;
+			case "string":
+					str=data;
+			break;
+			case "object" :
+				for(var i in data){
+					str+=i+"="+data[i]+"&";
+				}
+				str=str.slice(0,-1);
+			break;
+		}
+		var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+		if(menthod==="get"){
+			ajax.open(menthod,url+"?"+str,asy);
+			if(datatype==="json"){
+				ajax.responseType="json";
+			}
+			if(datatype==="document"){
+				ajax.responseType="document";
+			}
+			ajax.send();
+		}
+		if(menthod==="post"){
+			ajax.open(menthod,url,asy);
+			if(datatype==="json"){
+				ajax.responseType="json";
+			}
+			if(datatype==="document"){
+				ajax.responseType="document";
+			}
+			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			ajax.send(str);
+		}
+		ajax.onreadystatechange=function(){
+			if(ajax.readyState==4){
+				if(ajax.status==200){
+					var result;
+					switch(datatype){
+						case "text":
+							result=ajax.responseText;
+						break;
+						case "json":
+							result=ajax.response;
+						break;
+						case "document":
+							result=ajax.response;
+						break;
+						case "xml":
+							result=ajax.responseXML;
+						break;
+					};
+					sucess(result);
+				}
+				if(ajax.status==404){
+					var nofind="未找到";
+					error(nofind);
+				}
+			}
+		}
+
+	}
+	window.onload=function(){
+		ajax({
+			menthod:"post",
+			url:"bate.php",
+			asy:true,
+			data:{name:"yangwei",age:88},
+			datatype:"json",
+			sucess:function(obj){
+				console.log(obj);
+				//console.log(obj.getElementsByTagName("h1")[0].innerHTML);
+			},
+			error:function(obj){
+				console.log(obj);
+			}
+
+		})
+	}
+
+</script>
+</html>

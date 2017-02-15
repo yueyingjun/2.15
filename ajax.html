@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	div{
+		width: 400px;
+		height: 400px;
+		border:1px solid #666;
+		margin: 0 auto;
+	}
+	input{
+		display: block;
+		margin: 0 auto;
+	}
+</style>
+<body>
+	<div class="box">
+	</div>	
+	<input type="button" value="提交">
+</body>
+<script>
+	// var str="sdsada
+	// 	sdas";错误格式
+/*	window.onload=function(){
+		var div=document.getElementsByTagName("div")[0];
+		var button=document.getElementsByTagName("input")[0];
+		button.onclick=function(){
+			var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHttp");
+			xmlobj.onload=function(){
+				div.innerHTML=xmlobj.response;
+			}
+			xmlobj.open("post","ajax.php");
+			xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			xmlobj.send("name=zhangsan")			
+		}
+	}*/
+	window.onload=function(){
+		var div=document.getElementsByTagName("div")[0];
+		var button=document.getElementsByTagName("input")[0];
+		button.onclick=function(){
+			var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHttp");
+			xmlobj.onload=function(){
+				var cons=xmlobj.responseXML;
+				var len=cons.getElementsByTagName("stu");
+				var str="<table><tr><td>名字</td><td>年龄</td><td>性别</td></tr>";
+					for(var i=0;i<len.length;i++){
+						str+="<tr>"
+						str+="<td>"+len[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+						str+="<td>"+len[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+						str+="<td>"+len[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+						str+="</tr>"
+					}
+					str+="</table>";
+				document.body.innerHTML=str;
+			}
+			xmlobj.open("post","1.xml");
+			xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			xmlobj.send()			
+		}
+	}	
+</script>
+</html>
