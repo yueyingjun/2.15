@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<stu>
+		<name>郭小神</name>
+		<age>23</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>王小波</name>
+		<age>18</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>杰少</name>
+		<age>18</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>明少</name>
+		<age>23</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>关关</name>
+		<age>23</age>
+		<sex>男</sex>
+	</stu>
+</root>
