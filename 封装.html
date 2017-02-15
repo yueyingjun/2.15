@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>Document</title>
+</head>
+<script>
+	function ajax(obj){
+	var method=obj.method||"get";
+	var url=obj.url;
+	var asynch=obj.asynch==undefined?true:obj.asynch;
+	var dataType=obj.dataType||"text";
+	var success=obj.success;
+	var data="";
+	switch(typeof(obj.data)){
+		case "undefined":
+		    return;
+		break;
+		case "object":
+		    for(var i in obj.data){
+		    	data+=i+"="+obj.data[i]+"&";
+		    }
+		    data=data.slice(0,-1);
+		break;
+		case "string":
+		    data=obj.data;
+		break;    
+	}
+	var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+    if(method=="get"){
+    	ajax.open("get",url+"?"+data.asynch);
+    	ajax.send(null);
+    }else if(method=="post"){
+    	ajax.open("post",url,asynch);
+    	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    	ajax.send(data);
+    }
+    ajax.onreadystatechange=function(){
+    	if(ajax.readyState==4){
+    		if(ajax.status==200){
+    			var status;
+    			if(dataType=="text"){
+    				result=ajax.responseText;
+    			}
+    			if(dataType=="json"){
+    				result=eval("("+ajax.response+")");
+    			}
+    			if(dataType=="xml"){
+    				result=ajax.responseXML;
+    			}
+    			if(dataType=="document"){
+    				result=ajax.response;
+    			}
+    			if(success){
+    				success(result);
+    			}
+			}else if(ajax.status==404){
+				alert("页面不存在");
+			}else{
+				alert("服务器有误")
+			}	
+    	}
+    }
+}
+</script>
+<script>
+	ajax({
+	url:"ajax.php",
+	method:"post",
+	dateType:"json",
+	data:"name=zhangsan",
+	success:function(obj){
+		console.log(obj)
+	}
+})
+</script>
+</html>
