@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	
+	<body>
+		<div>
+			
+		</div>
+		<input type="button" value="按键" />
+	</body>
+	<style>
+		
+		
+		div{
+			width: 200px;
+			height:200px;
+			border:1px solid red;
+		
+			
+		}
+	</style>
+	
+<script>
+window.onload=function(){
+	var div=document.getElementsByTagName("div")[0];
+	var btn=document.getElementsByTagName("input")[0]
+
+	btn.onclick=function(){
+	 var ajax=new XMLHttpRequest();
+	  ajax.open("post","1.xml" );
+	 ajax.setRequestHeader("Content-Type","application/ x-www-form-urlencoded")
+	 
+	  ajax.send();
+	  
+	  
+	  
+	  ajax.onload=function(){
+	  	
+	   var content=ajax.responseXML;//接收数据
+	//追加到盒子中
+	  var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>" ;
+	                 
+	    var stus=content.getElementsByTagName("stu"); 
+	     
+	  for(var i=0;i<stus.length;i++){
+	  	str+="<tr>"
+	     str+="<td>"+stus[i].getElementsByTagName("name")[0].innerHTML +"</td>"
+	     str+="<td>"+stus[i].getElementsByTagName("age")[0].innerHTML +"</td>"
+	    str+="<td>"+stus[i].getElementsByTagName("sex")[0].innerHTML +"</td>"
+	  	str+="</tr>"
+            //从这个链子中将名字等一系列获取出来 然后组成字符串的形式输出来	  	
+	}
+//	var name=stus[0].getElementsByTagName("name")[0].innerHTML;
+  str+="</table>"
+  document.body.innerHTML=str
+//	console.log(name)
+//		str+="</table>"
+//		
+	}	
+}	
+		
+	
+	
+	
+	
+}
+	
+	
+	
+	
+	
+	
+</script>
+</html>
