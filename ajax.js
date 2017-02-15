@@ -8,33 +8,33 @@
  * obj.datatype数据类型
  * obj.status状态
  */
- function ajax(obj){
- 	var method=obj.methodget;
+  function ajax(obj){
+ 	var method=obj.method||"get";
  	var url=obj.url;
  	var success=obj.success;
- 	var data;
+ 	var data="";
  	switch(typeof data){
- 		case undefined ;
+ 		case "undefined": ;
  		break;
-   case string:
+ 		case "string":
  			data=obj.data;
  		break;
-   case object:
+ 		case "object":
  			for(i in obj.data){
- 				data+=i+=+obj.data[i]+&;
+ 				data+=i+"="+obj.data[i]+"&";
  			}
-    data=data.slice(0,-1);
+      data=data.slice(0,-1);
  		break; 			
  	}
-   	var asynch=obj.asynch==undefinedtrueobj.asynch;
-   	var dataType=obj.dataTypetext;
-   	var ajax=window.XMLHttpRequestnew XMLHttpRequest()new ActiveXObject(Microsoft,XMLHTTP);
-   	if(method==get){
-   		  	ajax.open(get,url++data,asynch);
+   	var asynch=obj.asynch==undefined?true:obj.asynch;
+   	var dataType=obj.dataType||"text";
+   	var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft","XMLHTTP");
+   	if(method=="get"){
+   		  	ajax.open("get",url+"?"+data,asynch);
    		  	ajax.send(null);
-   	}else if(method==post){
-   			ajax.open(post,url,asynch);
-   			ajax.setRequestHeader(Content-Type,applicatiionx-www-form-urlencoded);
+   	}else if(method=="post"){
+   			ajax.open("post",url,asynch);
+   			ajax.setRequestHeader("Content-Type","applicatiion/x-www-form-urlencoded");
    			ajax.send(data);
    	}
    	ajax.onreadystatechange=function(){
@@ -42,25 +42,26 @@
    			if(ajax.status==200){
    				var result;
    				switch(dataType){
-         case text:
+   					case "text":
    						result=ajax.responseText;
    					break;
-        case xml:
+   					case "xml":
    						result=ajax.responseXML;
    					break;
-        case json:
-               alert(1);
-   						result=eval((+ajax.response+));
+   					case "json":
+              // alert(1);
+   						result=eval("("+ajax.response+")");
    					break;
    				}
    				if(success){
    					success(result);
    				}
    			}else if(ajax.status==404){
-   				alert(页面不存在);
+   				alert("页面不存在");
    			}else{
-   				alert(请求失败);
+   				alert("请求失败");
    			}
    		}   		   		
    	}   	 	   	
+ }
  }
