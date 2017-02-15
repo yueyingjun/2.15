@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		function ajax(obj){
+			var method=obj.method||"get";//将参数设定默认值，传入方式
+			var url=obj.url;//传入地址
+			var dataType=obj.dataType||"text";//传入的类型
+			var asynch=obj.asynch==undefined?true:obj.asynch;//默认为异步
+			var success=obj.success;//ajax成功后要执行的函数
+			var data="";//接收的数据
+			switch(typeof(obj.data)){
+				case "undefined";;
+					break;
+				case "object";
+					for(var i in obj.data){
+						data+=i+"="+obj.data[i]+"&";
+					}
+					data=data.slice(0,-1);
+					break;
+				case "string";
+					data=obj.data;
+					break;
+			}
+			var ajax=window.XMLTttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+			if(method=="get"){
+				ajax.open("get",url+"?"+data,asynch);
+				ajax.send();
+			}else if(method=="post"){
+				ajax.open("post",url,asynch);
+				ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				ajax.send(data);
+			}
+			ajax.onreadystatechange=function(){
+				if(ajax.readyState==4){
+					if(ajax.status==200){
+						var result;
+						switch(dataType){
+							case "text";
+								result=ajax.responseText;
+							break;
+							case "json";
+								result=eval("("+ajax.reseponse+")");
+							break;
+							case "xml";
+								result=ajax.responseXML;
+							break;
+						}
+						if(success){
+							success(result);
+						}
+					}else if(ajax.status==404){
+						alert("页面没找到!");
+					}else{
+						alert("页面不存在!");
+					}
+				}
+			}
+		}
+	</script>
+</html>
