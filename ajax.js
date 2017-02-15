@@ -1,11 +1,11 @@
 /* ajax封装
  * @param  {object} obj
- * //obj包含以下内容
+ * //obj包含以下内容 *为必须 []为可选
  * obj.url链接地址          *
- * obj.methodget获取方式    *
- * obj.data数据
- * obj.success回调函数
- * obj.datatype数据类型
+ * obj.methodget获取方式    []默认使用get方式
+ * obj.data数据            []
+ * obj.success回调函数      []
+ * obj.datatype数据类型     []可接受text,xml,document,json
  * obj.status状态
  */
 
@@ -62,7 +62,8 @@ function ajax(obj) {
 				}
 			} else if (ajax.status == 404) {
 				alert("页面不存在");
-			} else {
+			} 
+			else {
 				alert("请求失败");
 			}
 		}
