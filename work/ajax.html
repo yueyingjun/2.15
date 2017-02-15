@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="ajax.js"></script>
+		<style>
+			div{
+				width: 200px;
+				height: 200px;
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<input type="button" value="提交" />
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			var btn=document.getElementsByTagName("input")[0];
+			var box=document.getElementsByTagName("div")[0];
+			btn.onclick=function(){
+				ajax({
+					url:"1.php",
+					type:"post",
+					data:{"name":"zhangsan"},
+					asynch:true,
+					dataType:"text",
+					success:function(obj){
+						box.innerHTML=obj;
+					},
+					error:function(obj){
+						box.innerHTML=obj;
+					}
+				})
+			}
+		}
+	</script>
+</html>
