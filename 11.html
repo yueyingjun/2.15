@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		div{
+			width:300px;
+			height: 300px;
+			border: 1px solid red;
+		}
+		
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var div=document.getElementsByTagName("div")[0];
+			var btn=document.getElementsByTagName("input")[0];
+			
+			btn.onclick=function(){
+				var obj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+				obj.onload=function(){
+					var content=obj.responseXML;						
+					var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+					var stus=content.getElementsByTagName("stu");
+					for(var i=0;i<stus.length;i++){
+						str+="<tr>";
+
+						str+="<td>"+stus[i].getElementsByTagName('name')[0].innerHTML+"</td>";
+						str+="<td>"+stus[i].getElementsByTagName('age')[0].innerHTML+"</td>";
+						str+="<td>"+stus[i].getElementsByTagName('sex')[0].innerHTML+"</td>";
+						str+="</tr>";
+					}
+					str+="</table>";
+					div.innerHTML=str;
+				}
+				obj.open("get","1.xml");
+				obj.send();
+			}
+		}	
+	</script>
+	<body>
+		<div></div>
+		<input type="button" value="提交"/>
+		<input type="button" value="停止"/>
+	</body>
+</html>
