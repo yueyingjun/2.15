@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		div{
+			width:200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+	<body>
+		<div></div>
+		<input type="button" value="提交"/>
+	</body>
+	<script>
+//格式
+// ajax{
+	// method:"get"/"post",
+	// url:"one.php",
+	// data:{aa:bb,cc:dd}/"aa=bb&cc=dd",
+	// dataType:"text"/"json"/"XML"/"document",
+	// asynch:true,
+	// success:function(e){
+	// 	console.log(/..);
+	// },
+	//error:function(){	
+	//}
+// }
+
+	function ajax(obj){
+		var method=obj.ethod||"get";
+		var url=obj.url;
+		var data=obj.data;
+		//判断data的类型
+		if(typeof data==="object"){
+			var str="";
+			for(var i in data){
+				str+=i+"="+data[i]+"&";
+			}
+			data=str.slice(0,-1);
+		}else if(typeof data==="string"){
+			data=data;
+		}
+		console.log(data);
+		var dataType=obj.dataType||"text";
+		var asynch=obj.asynch===undefined?true:obj.asynch;
+		//ajax创建兼容
+		var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+		//method类型
+		switch(method){
+			case "get":
+				ajax.open(method,url+"?"+data,asynch);
+				ajax.send();
+			break;
+			case "post":
+				ajax.open(method,url,asynch);
+				ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				ajax.send(data);
+			break;
+		}
+		//datatype类型
+		if(dataType!=="XML"){
+			ajax.responseType=dataType;	
+			ajax.onreadystatechange=function(){
+				if(ajax.readyState==4){
+					if(ajax.status==200){
+						//成功
+						if(obj.success){
+							obj.success(ajax.response);
+						}
+					}else{
+						//不成功
+						if(obj.error){
+							obj.error();
+						}
+					}
+				}
+			}
+		}else if(dataType==="XML"){
+			ajax.onreadystatechange=function(){
+				if(ajax.readyState==4){
+					if(ajax.status==200){
+						if(obj.success){
+							obj.success(ajax.responseXML);
+						}
+					}else{
+						if(obj.error){
+							obj.error();
+						}
+					}
+				}
+			}
+		}	
+	}
+	var box=document.getElementsByTagName("div")[0];
+	var btn=document.getElementsByTagName("input")[0];
+	btn.onclick=function(){
+		ajax({
+			method:"get",
+			url:"ajax1.php",
+	 		data:{name:"hi",age:90},
+	 		dataType:"text",
+			asynch:true,
+			success:function(e){
+				//console.log(e.getElementsByTagName("h1")[0].innerHTML);
+				console.log(e);
+	 		},
+			error:function(){
+				console.log("雾霾太大，找不到页面T0T");
+			}
+		})
+	}
+	
+
+	</script>
+</html>
