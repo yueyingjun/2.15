@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script>
+		window.onload=function(){
+			var btn=document.getElementsByTagName("input")[0];
+			var div=document.getElementsByTagName("div")[0];
+			var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP")
+			xmlobj.onreadystatechange=function(){
+				if(xmlobj.readyState==4){
+					if(xmlobj.status==200){
+						btn.onclick=function(){
+							var root=xmlobj.responseXML;
+							console.log(root);
+							var stus=root.getElementsByTagName("stu");
+							var str="<table><th><td>姓名</td><td>年龄</td><td>性别</td></th>"
+							for(i=0;i<stus.length;i++){
+								str+="<tr><td>"+root.getElementsByTagName('name')[i].innerHTML+"</td>"
+								str+="<td>"+root.getElementsByTagName('age')[i].innerHTML+"</td>"
+								str+="<td>"+root.getElementsByTagName('sex')[i].innerHTML+"</td></tr>"
+							}
+							str+="</table>";
+							div.innerHTML=str;
+						}
+					}
+				}
+			}
+			xmlobj.open("post","ajax.xml");
+			xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");	
+			xmlobj.send();
+		}
+	</script>
+	<body>
+		<div></div>
+		<input type="button" value="按钮">
+	</body>
+	<style>
+		div{
+			width:500px;
+			height:500px;
+			border:1px solid red;
+		}
+		input{
+			
+		}
+	</style>
+</html>
