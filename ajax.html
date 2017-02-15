@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="ajax封装.js"></script>
+		<style>
+			div{
+				width:200px;
+				height:200px;
+				background: yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<input type="button" value="按钮"/>
+	</body>
+</html>
+<script>
+	window.onload=function(){
+		var input=document.getElementsByTagName("input")[0];
+		var div=document.getElementsByTagName("div")[0];
+		input.onclick=function(){
+			var ajax=new XMLHttpRequest();
+			ajax.open("get","1.xml");
+			ajax.send();
+			ajax.onload=function(){
+				var xml=ajax.responseXML;
+				var stu=xml.getElementsByTagName("stu");
+				var str="<table><tr><td>姓名</td><td>年龄</td><td>性别</td></tr>"
+              for(var i=0;i<stu.length;i++){
+              	str+="<tr>";
+              	str+="<td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+              	str+="<td>"+stu[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+              	str+="<td>"+stu[i].getElementsByTagName("sex")[0].innerHTML+"</td>";              	
+              	str+="</tr>";
+              }
+				str+="</table>";
+				div.innerHTML=str;
+			}
+		}
+	}
+	
+	
+	
+//window.onload=function(){
+//		var input=document.getElementsByTagName("input")[0];
+//		var div=document.getElementsByTagName("div")[0];
+//		input.onclick=function(){
+//			var ajax=new XMLHttpRequest();
+//			ajax.open("post","1.php");
+//			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+//			ajax.send("name=张三&&age=12");
+//			ajax.onload=function(){
+//				div.innerHTML=ajax.response;
+//			}
+//		}
+//	}
+
+
+
+
+
+
+
+//	window.onload=function(){
+//		var input=document.getElementsByTagName("input")[0];
+//		var div=document.getElementsByTagName("div")[0];
+//		input.onclick=function(){
+//			var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Micrsoft HTTP");
+//			ajax.open();
+//			ajax.send();
+//			ajax.onreadystatechange=function(){
+//				if(ajax.readyState==4){
+//					if(ajax.status==200){
+//						div.innerHTML=ajax.response;
+//					}
+//				}
+//			}
+//		}
+//	}
+
+
+ 
+</script>
+
