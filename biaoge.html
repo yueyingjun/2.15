@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		div{
+			width: 200px;
+			height: 200px;
+			border: 1px solid #000000;
+		}
+	</style>
+	<body>
+		<div></div>
+		<input type="button" value="anniu" formenctype="application/x-www-form-urlencoded"/>
+	</body>
+	<script>
+		var div=document.querySelectorAll("div")[0];
+		var btn=document.querySelectorAll("input")[0];
+		btn.onclick=function(){
+			var obj=new XMLHttpRequest();
+			obj.open("get","xml.xml",true);
+			obj.send();
+			obj.onloadend=function(){
+				var shuchu=obj.responseXML;
+				var stu=shuchu.querySelectorAll("stu")
+				var str="<table border='1' cellspacing='0' align='center'><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>"
+				for(var i=0;i<stu.length;i++){
+					str+="<tr>"
+					str+="<td>"+stu[i].querySelectorAll("name")[0].innerHTML+"</td>"
+					str+="<td>"+stu[i].querySelectorAll("age")[0].innerHTML+"</td>"
+					str+="<td>"+stu[i].querySelectorAll("sex")[0].innerHTML+"</td>"
+					str+="</tr>"
+				}
+				str+="</table>"
+				div.innerHTML=str
+			}
+		}
+		
+	</script>
+</html>
