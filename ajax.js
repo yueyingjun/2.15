@@ -16,14 +16,14 @@
  	switch(typeof data){
  		case undefined ;
  		break;
- 		case string
+   case string:
  			data=obj.data;
  		break;
- 		case object
+   case object:
  			for(i in obj.data){
  				data+=i+=+obj.data[i]+&;
- 				data=data.slice(0,-1);
  			}
+    data=data.slice(0,-1);
  		break; 			
  	}
    	var asynch=obj.asynch==undefinedtrueobj.asynch;
@@ -42,13 +42,13 @@
    			if(ajax.status==200){
    				var result;
    				switch(dataType){
-   					case text
+         case text:
    						result=ajax.responseText;
    					break;
-   					case xml
+        case xml:
    						result=ajax.responseXML;
    					break;
-   					case json
+        case json:
                alert(1);
    						result=eval((+ajax.response+));
    					break;
