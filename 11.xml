@@ -1,0 +1,28 @@
+<?xml version="1.0"  encoding="utf-8" ?>
+<tab>
+	<stu>
+		<name>张三</name>
+		<age>10</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>王五</name>
+		<age>23</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>李四</name>
+		<age>20</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>周工</name>
+		<age>32</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>武术</name>
+		<age>68</age>
+		<sex>男</sex>
+	</stu>
+</tab>
