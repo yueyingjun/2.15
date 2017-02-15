@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ajax-xml</title>
+    <style>
+
+        div{
+            height:200px;
+            width:200px;
+            border:1px solid #000;
+            font-size:24px;
+        }
+
+    </style>
+
+    <script>
+
+        // 功能：获取xml文件中的信息，并将指定信息转换成表格，并输出到div中
+        window.onload=function(){
+            var btn=document.getElementsByTagName("input")[0];
+            var box=document.getElementsByTagName("div")[0];
+            var xmlobj=new XMLHttpRequest();
+            btn.onclick=function(){
+                xmlobj.onload=function(){
+                    var xml=xmlobj.responseXML;
+                    var trs=xml.getElementsByTagName("stu");
+                    var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+                    for(var i=0;i<trs.length;i++){
+                        str+="<tr>";
+                        str+="<td>"+trs[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+                        str+="<td>"+trs[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+                        str+="<td>"+trs[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+                        str+="</tr>";
+                    }
+                    str+="</table>";
+                    box.innerHTML=str;
+                }
+                xmlobj.open("get","1.xml");
+                xmlobj.send();
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+    <div></div>
+    <input type="button" value="按钮"/>
+</body>
+</html>
