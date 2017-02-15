@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>作业</title>
+		<script>
+		console.log(new XMLHttpRequest())
+			window.onload=function(){
+				var div=document.getElementsByTagName("div")[0];
+				var btn=document.getElementsByTagName("input")[0];
+				btn.onclick=function(){
+					var aobj=new XMLHttpRequest;
+					aobj.onload=function(){
+						var shuchu=aobj.responseXML;
+						var stu=shuchu.getElementsByTagName("stu");
+						var str="<table><tr><th>名字</th><th>年龄</th><th>性别</th></tr>";
+						for(var i=0;i<stu.length;i++){
+							str+="<tr>";
+								str+="<td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td>"
+								str+="<td>"+stu[i].getElementsByTagName("age")[0].innerHTML+"</td>"
+								str+="<td>"+stu[i].getElementsByTagName("sex")[0].innerHTML+"</td>"
+							str+="</tr>"
+						}
+						str+="</table>";
+						document.body.innerHTML=str;
+					}
+					aobj.open("get","new.xml");
+					aobj.send()
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div style="height:200px;border:1px solid mediumvioletred;width:200px;"></div>
+		<input type="button" value="按钮" style="margin-top: 3px;"/>
+	</body>
+</html>
