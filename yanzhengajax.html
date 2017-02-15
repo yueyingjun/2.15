@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/ajax.js"></script>
+		<style>
+			div{
+				width: 200px;
+				height: 200px;
+				border: 1px solid #CCCCCC;
+			}
+			
+		</style>
+		<script>
+			window.onload=function(){
+				var div=document.getElementsByTagName("div")[0];
+				var btn=document.getElementsByTagName("input")[0];
+				btn.onclick=function(){
+					ajax({
+						url:"zs.php",
+						data:{"name":"zhangsan","age":"12"},
+						method:"get",
+						datatype:"Text",
+						success:function(a){
+							if(a){
+								alert("成功");
+							}else{
+								alert("失败");
+							}
+						}
+					})
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div></div>
+		<input type="button" value="按钮"/>
+	</body>
+</html>
