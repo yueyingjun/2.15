@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="function.js"></script>
+</head>
+<style>
+	div{
+		width: 200px;
+		height: 50px;
+		border: 1px solid #333;
+		font-size: 20px;
+		text-align: center;
+		line-height: 50px;
+		color: red;
+	}
+</style>
+<body>
+	<input type="text" id="text">
+	<input type="button" value="按钮" id="btn">
+	<div></div>
+	
+</body>
+<script>
+	var box=document.getElementsByTagName("div")[0];
+	var text=document.getElementById("text")
+	var btn=document.getElementById("btn")
+	btn.onclick=function(){
+		var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+		xmlobj.onreadystatechange=function()
+			{
+				if (xmlobj.readyState==4 && xmlobj.status==200)
+				{
+					var str="<table>";
+						var trs=xmlobj.responseXML.getElementsByTagName("stu")
+						for (var i = 0; i < trs.length; i++) {
+							str+="<tr>"
+								str+="<td style='border:1px solid red;'>"+trs[i].getElementsByTagName('name')[0].innerHTML+"</td>"
+								str+="<td style='border:1px solid red;'>"+trs[i].getElementsByTagName('age')[0].innerHTML+"</td>"
+							str+="</tr>"
+						};
+					str+="</table>"
+					document.body.innerHTML=str;
+				}
+			}
+		// xmlobj.open("post","yue0215.php")
+		// xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		// xmlobj.send("name=zhangsan")
+
+		xmlobj.open("get","xml.xml")
+		xmlobj.send()
+	}
+
+</script>
+</html>
