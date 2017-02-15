@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+			
+	div{
+		height: 200px;
+		width: 200px;
+		border: 1px solid #000;
+		/*margin: 0 auto;*/
+		/*margin-top: 50px;*/
+	}
+	input{
+		height: 40px;
+		color: #000;
+	}
+	</style>
+	<body>
+	
+		<div></div>
+		<input type="button" value="按钮" />
+	</body>
+	<script>
+//get
+		window.onload=function(){
+			var an=document.getElementsByTagName("input")[0];
+			var div=document.getElementsByTagName("div")[0];	
+			an.onclick=function(){
+				var ajax=new XMLHttpRequest();
+				ajax.open("get","1.xml");
+                ajax.send();
+				ajax.onload=function(){
+					var xxml=ajax.responseXML;
+//					console.log(xxml)
+                    var xmlstu=xxml.getElementsByTagName("stu");
+//                  console.log(xmlstu)
+					var str="<table><tr><td>姓名</td><td>年龄</td><td>性别</td></tr>";
+					for(var i=0;i<xmlstu.length;i++){
+						str+="<tr>";
+						str+="<td>"+xmlstu[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+						str+="<td>"+xmlstu[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+						str+="<td>"+xmlstu[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+						str+="</tr>";
+					}
+					str+="</table>";
+					div.innerHTML=str;
+				}
+			}
+		}	
+	
+	//	window.onload=function(){
+	//		var an=document.getElementsByTagName("input")[0];
+	//		var div=document.getElementsByTagName("div")[0];	
+	//		an.onclick=function(){
+	//			var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+	//			ajax.onreadystatechange=function(){
+	//				if(ajax.readyState==4){
+	//					if(ajax.status==200){
+	//						div.innerHTML=ajax.response;
+	//					}
+	//				}
+	//			}
+	//			ajax.open("get","1.php?name=李雅洁");
+	//			ajax.send();
+	//		}
+	//	}	
+	
+//post
+//   	window.onload=function(){
+//			var an=document.getElementsByTagName("input")[0];
+//			var div=document.getElementsByTagName("div")[0];	
+//			an.onclick=function(){
+//				var ajax=new XMLHttpRequest();
+//				ajax.open("post","1.php");
+//				ajax.setRequestHeader("content-type","application/x-www-form-urlencoded");
+//				ajax.send("name=李雅洁");
+//				ajax.onload=function(){
+//					div.innerHTML=ajax.response;
+//				}
+//			}
+//		}	
+		
+		
+	</script>
+</html>
