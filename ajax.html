@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>ajax</title>
+</head>
+<style type="text/css">
+	td{
+		border: 1px solid #000;
+	}
+</style>
+<body>
+	<div style="width:150px;height:150px;border:1px solid #000"></div>
+	<input type="button"value="click">
+
+</body>
+<script>
+	window.onload=function(){
+		var div=document.getElementsByTagName('div')[0]
+		var btn=document.getElementsByTagName('input')[0]
+		btn.onclick=function(){
+			var xmlobj=new XMLHttpRequest()
+			xmlobj.onreadystatechange=function(){
+				if(xmlobj.readyState==4){
+					if(xmlobj.status==200){
+						var root=xmlobj.responseXML;
+						var stu=root.getElementsByTagName("stu")
+						var str="<table><th>姓名</th><th>年龄</th><th>性别</th>"
+						for(var i=0;i<stu.length;i++){
+//							str=str+"<tr>"+root.getElementsByTagName('name')[i].innerHTML+"</tr>";
+//							str=str+"<tr>"+root.getElementsByTagName('age')[i].innerHTML+"</tr>";
+//							str=str+"<tr>"+root.getElementsByTagName('sex')[i].innerHTML+"</tr>";
+							str=str+"<tr><td>"+root.getElementsByTagName('name')[i].innerHTML+"</td><td>"+root.getElementsByTagName('age')[i].innerHTML+"</td><td>"+root.getElementsByTagName('sex')[i].innerHTML+"</td></tr>"
+						}
+						str=str+"</table>"
+						console.log(str)
+						div.innerHTML=str;
+					}
+				}
+			}
+//			xmlobj.onload=function(){
+//				div.innerHTML=xmlobj.response;
+//			}
+			xmlobj.open("post","ajax.xml");
+			xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+			xmlobj.send()
+//			xmlobj.open("get","ajax.php?name=zhangsan")
+//			xmlobj.send()
+		}
+	}
+</script>
+</html>
