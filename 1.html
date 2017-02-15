@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>Document</title>
+</head>
+<style>
+	div{
+		width:500px;
+		height:200px;
+		border:1px solid red;
+	}
+</style>
+<script type="text/javascript">
+//	window.onload=function(){
+//		var btn=document.getElementsByTagName("input")[0];
+//		var div=document.getElementsByTagName("div")[0];
+//		btn.onclick=function(){
+//			var xml=new XMLHttpRequest();
+//			xml.onload=function(){
+////				div.innerText=xml.response;
+//             var stu=document.getElementsByTagName("stu");
+//             console.log(stu.length);
+//			}
+//			xml.open("get","1.xml");
+////          xml.open("post","1.php");
+////          xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+//			xml.send();
+//		}
+//	}
+	window.onload=function(){
+		var btn=document.getElementsByTagName("input")[0];
+		var div=document.getElementsByTagName("div")[0];
+		btn.onclick=function(){
+			var xml=new XMLHttpRequest();
+			xml.onload=function(){
+				var xmls=xml.responseXML;
+                var stu=xmls.getElementsByTagName("stu");
+                var str="<table><tr><th>name</th><th>age</th><th>sex</th></tr>";
+                for(var i=0;i<stu.length;i++){
+                	str+="<tr>";
+                	str+="<td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+                	str+="<td>"+stu[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+                	str+="<td>"+stu[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+                	str+="</tr>";
+                }
+                str+="</table>"
+			    document.body.innerHTML=str;
+                
+			}
+			xml.open("get","1.xml");
+			xml.send();
+		}
+	}
+</script>
+<body>
+	<div></div>
+	<input	type="button"  value="按钮">
+</body>
+</html>
