@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+	<stu>
+		<name>jack</name>
+		<age>12</age>
+		<sex>man</sex>
+	</stu>
+	<stu>
+		<name>lucy</name>
+		<age>13</age>
+		<sex>woman</sex>
+	</stu>
+	<stu>
+		<name>junjun</name>
+		<age>14</age>
+		<sex>man</sex>
+	</stu>
+	<stu>
+		<name>simon</name>
+		<age>8</age>
+		<sex>man</sex>
+	</stu>
+	<stu>
+		<name>yalonda</name>
+		<age>20</age>
+		<sex>woman</sex>
+	</stu>
+</root>
