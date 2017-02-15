@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<porsen>
+	<stu>
+		<name>张三</name>
+		<age>11</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>李四</name>
+		<age>18</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>王五</name>
+		<age>12</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>赵柳</name>
+		<age>15</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>孙阳</name>
+		<age>16</age>
+		<sex>男</sex>
+	</stu>
+</porsen>
