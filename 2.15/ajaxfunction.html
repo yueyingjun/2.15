@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	<script src="ajax.js"></script>
+	<style>
+	div{
+	    width: 300px;
+	    height: 300px;
+	    background: red;
+	    border: 1px solid #ccc;
+	}
+	input{
+	    width: 50px;
+	    height: 20px;
+	    
+	}
+	</style>
+	</head>
+	<body>
+	<div></div>
+	<input type="button" value="提交">
+
+	</body>
+<script>
+    var div=document.getElementsByTagName("div")[0];
+	var btn=document.getElementsByTagName("input")[0];
+	btn.onclick=function(){
+	   ajax({
+	      
+	      url:"login.php",
+	      data:{name:"zhangsan"},
+	      dataType:"text",
+	      success:function(aa){
+	         console.log(aa);
+	      }
+	   })
+	}
+</script>
+</html>
