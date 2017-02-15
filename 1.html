@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        width: 200px;
+        height: 200px;
+        border:1px solid red;
+    }
+</style>
+<body>
+<div></div>
+<input type="button"value="click">
+<script>
+    window.onload=function(){
+        var div=document.querySelector("div");
+        var click=document.querySelector("input");
+        var obj=XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+//        obj.overrideMimeType("text/xml");
+        obj.open("post","1.xml");//使用post方法必须设置头信息，也就是下面这句，而且必须放在open之后
+        obj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        obj.send();
+
+        obj.onload=function(){
+
+            var content=obj.responseXML;
+            click.onclick=function(){
+                var str="<table><th>姓名</th><th>年龄</th><th>性别</th>";
+                var tds=content.getElementsByTagName("stu");
+                for(var i=0;i<tds.length;i++){
+                    str+="<tr>";
+                    str+="<td>"+content.getElementsByTagName('name')[i].innerHTML+"<td>";
+                    str+="<td>"+content.getElementsByTagName('age')[i].innerHTML+"<td>";
+                    str+="<td>"+content.getElementsByTagName('sex')[i].innerHTML+"<td>";
+                    str+="</tr>";
+                }
+                str+="</table>";
+                document.body.innerHTML=str;
+            }
+
+        }
+
+    }
+</script>
+</body>
+</html>
