@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<script src="ajax.js"></script>
+</head>
+<style>
+	div{
+		width:200px;height:200px;
+		border:1px solid red;
+	}
+</style>
+<script>
+	// var xmlobj=window.XMLHttpRequest? new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+	// window.onload=function(){
+	// 	var btn=document.getElementsByTagName("input")[0];
+	// 	var div=document.getElementsByTagName("div")[0];
+	// 	btn.onclick=function(){
+	// 		var xmlobj=new XMLHttpRequest();
+	// 		xmlobj.open("post","1.php");
+	// 		xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+	// 		xmlobj.send("name=zhangsan");
+	// 		xmlobj.onreadystatechange=function(){
+	// 		    if(xmlobj.readyState==4){
+	// 		    	if(xmlobj.status==200){
+	// 		    		div.innerHTML=xmlobj.response;
+	// 		    	}	
+	// 		    }
+			    
+	// 		}
+	// 	}
+		
+	// }
+	// window.onload=function(){
+	// 	var btn=document.getElementsByTagName("input")[0];
+	// 	var div=document.getElementsByTagName("div")[0];
+	// 	btn.onclick=function(){
+			// var xmlobj=new XMLHttpRequest();
+			// xmlobj.open("get","1.php?name=zhangsan");
+			// xmlobj.send();
+			// xmlobj.onreadystatechange=function(){
+			//     if(xmlobj.readyState==4){
+			//     	if(xmlobj.status==200){
+			//     		div.innerHTML=xmlobj.response;
+			//     	}	
+			//     }
+			    
+			// }
+	// 		ajax({
+	// 			method:"get",
+	// 			url:"1.php",
+	// 			asynch:true,
+	// 			dataType:"text",
+	// 			data:"name=zhangsan",
+	// 			success:function(text){
+	// 				// div.innerHTML=ajax.response;
+	// 				console.log(text)
+	// 			}
+	// 		})
+	// 	}
+		
+	// }
+	window.onload=function(){
+		var btn=document.getElementsByTagName("input")[0];
+		var div=document.getElementsByTagName("div")[0];
+		btn.onclick=function(){
+			var xmlobj=new XMLHttpRequest();
+			xmlobj.open("get","1.xml");
+			xmlobj.send();
+			xmlobj.onreadystatechange=function(){
+			    if(xmlobj.readyState==4){
+			    	if(xmlobj.status==200){
+			    		var content=xmlobj.responseXML;
+			    		var stu=content.getElementsByTagName("stu");
+			    		var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>"
+			    		for(var i=0;i<stu.length;i++){
+
+			    			str+="<tr><td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+			    			str+="<td>"+stu[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+			    			str+="<td>"+stu[i].getElementsByTagName("sex")[0].innerHTML+"</td></tr>";
+			    		
+			    		}
+			    		str+="</table>"
+			    		console.log(str)
+			    		// div.innerHTML=stu.responseXML;
+		    			document.write(str)
+			    	}	
+			    } 
+			}
+		}
+		
+	}
+	// responseType="json"text document arraybuffer  bolb
+
+	
+</script>
+<body>
+	<div></div>
+	<input type="button" value="按钮">
+</body>
+</html>
