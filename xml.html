@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>php中获取</title>
+		<style type="text/css">
+			.box{
+				width:300px;
+				height: 300px;
+				border:1px solid #ccc;
+			}
+			table{
+				
+			}
+			td{
+				height: 30px;
+				width: 100px;
+				text-align: center;
+				border:1px solid #ccc;
+			}
+		</style>
+		<script type="text/javascript">
+		window.onload=function(){
+			var box=document.getElementsByClassName("box")[0];
+			var btn=document.getElementsByTagName("input")[0];
+			var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("MicrosoftXMLHTTP");
+			btn.onclick=function(){
+				ajax.open("post","2.xml");
+				ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");//post方式设置头信息
+				ajax.send("name=zhangsan&&age=14");
+				ajax.onreadystatechange=function(){
+					if(ajax.readyState==4){
+						if(ajax.status==200){
+							box.innerHTML=ajax.response;
+								var stu=box.getElementsByTagName("stu");  //获取要操作的元素
+								var str="<table cellspacing=0 cellspadding=0><tr><td>姓名</td><td>年龄</td><td>性别</td></tr>";//建立一个表格
+								for(var i=0;i<stu.length;i++){ //循环行
+									str+="<tr>";
+									    str+="<td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+									    str+="<td>"+stu[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+									    str+="<td>"+stu[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+									str+="</tr>";
+								}
+								str+="</table>";
+								box.innerHTML=str;  //创建的表格追加到body中
+						}else if(ajax.status==404){
+							alert("页面未找到");
+						}
+					}
+				}
+			}
+			btn1.onclick=function(){
+				ajax.onabort=function(){
+					ajax.onreadystatechange=null;
+				}
+			}
+		}
+			
+		</script>
+	</head>
+	<body>
+		<div class="box"></div>
+		<input type="button" value="按钮"/>
+	</body>
+</html>
