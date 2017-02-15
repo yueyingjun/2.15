@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>ajax</title>
+	<script src="ajax.js"></script>
+</head>
+<style>
+	*{
+		margin: 0;
+		padding:0;
+		list-style: none;
+	}
+	div{
+		width: 201px;
+		height: 201px;
+		border: 1px solid red;
+	}
+	th{
+		background-color: #666;
+		color: white;
+		width: 100px;
+		height: 30px;
+		line-height: 30px;
+
+	}
+	td{
+		border: 1px solid #666;
+		width: 90px;
+		height: 33px;
+		line-height: 33px;
+		text-align: center;
+	}
+    input{
+    	width: 50px;
+    	height: 30px;
+    }
+    table{
+    	border-collapse: collapse;
+    }
+</style>
+<body>
+	<div></div>
+	<input type="button" value="添加">
+</body>
+<script>
+window.onload=function(){	
+	var div=document.getElementsByTagName("div")[0];
+	var button=document.getElementsByTagName("input")[0];
+	  button.onclick=function(){
+	//   	var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveObject("Microsoft.XMLHTTP");      //解决兼容问题
+	//     xmlobj.onload=function(){          //监听传输完成后执行事件
+      
+ //        	div.innerHTML=xmlobj.response;        //ajax返回的数据放在response里
+ //        }
+ //        // xmlobj.open("get","Ajax.php?name=zhangsan");     //get传输方式  传输内容可以接在地址后面写  前面加?
+ //        xmlobj.open("post","Ajax.php");       //post传输方式
+ //        xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");    //设置编码方式(post方式写)  写在open后面  
+ //        xmlobj.send("name=zhangsan&age=12");     //post方式传输的数据写在send里面
+	// }
+	// var xmlobj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveObject("Microsoft.XMLHTTP");
+	// xmlobj.onload=function(){
+	// 	var lens=xmlobj.responseXML;
+	// 	var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+	// 	var trs=lens.getElementsByTagName("stu");
+	// 	for (var i = 0; i < trs.length; i++) {
+	// 		str+="<tr>";
+	// 		str+='<td>'+trs[i].getElementsByTagName("name")[0].innerHTML+'</td>'+
+	// 		     '<td>'+trs[i].getElementsByTagName("age")[0].innerHTML+'</td>'+
+	// 		     '<td>'+trs[i].getElementsByTagName("sex")[0].innerHTML+'</td>'
+ //            str+="</tr>";
+	// 	}
+	// 	str+="</table>";
+	// 	div.innerHTML=str;
+	// }
+
+	// 	xmlobj.open("post","xml.xml"); 
+	// 	xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	// 	xmlobj.send();
+       
+       ajax({
+       	url:"xml.xml",
+       	dataType:"xml",
+       	success:function(lens){
+			// var lens=xmlobj.responseXML;
+			var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+			var trs=lens.getElementsByTagName("stu");
+			for (var i = 0; i < trs.length; i++) {
+				str+="<tr>";
+				str+='<td>'+trs[i].getElementsByTagName("name")[0].innerHTML+'</td>'+
+				     '<td>'+trs[i].getElementsByTagName("age")[0].innerHTML+'</td>'+
+				     '<td>'+trs[i].getElementsByTagName("sex")[0].innerHTML+'</td>'
+	            str+="</tr>";
+			}
+			str+="</table>";
+			div.innerHTML=str;
+       	}
+       })
+    
+
+
+
+	}
+}
+</script>
+</html>
