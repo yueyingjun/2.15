@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 200px;
+				border: 1px solid red;
+			}
+		</style>
+		<script>
+			window.onload=function(){
+				ajax=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject();
+				var btn=document.getElementsByTagName("input")[0];
+				var div=document.getElementsByTagName("div")[0];
+				btn.onclick=function(){
+					ajax.onreadystatechange=function(){
+						if(ajax.readyState==4){
+							if(ajax.status==200){
+								div.innerHTML=ajax.response;	 //获取到数据后干的什么事
+								var newXml=ajax.responseXML;
+								console.log(newXml);
+								var trs=newXml.getElementsByTagName("stu");
+								var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+										for(var i=0;i<trs.length;i++){
+											str+="<tr>";
+											str+="<td>"+trs[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+											str+="<td>"+trs[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+											str+="<td>"+trs[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+											str+="</tr>";
+										}
+								 str+="</table>";
+								 document.body.innerHTML=str;
+							}
+						}
+					}
+					/*get方式传送获取数据*/
+//					ajax.open("get","1.php?name=lisi");  
+//					ajax.send(null);
+					/*post方式传递获取数据*/
+					ajax.open("post","1.xml");
+					ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+					ajax.send("name=lisi&age=18");
+				}
+			}
+			
+			
+		</script>
+	</head>
+	<body>
+		<div></div>
+		<input type="button" value="按钮"/>
+	</body>
+</html>
