@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		div{
+			width:300px;
+			height:300px;
+			background:pink;
+		}
+	</style>
+	<body>
+		<div></div>
+		<input type="button" value="按钮" />
+	</body>
+	<script>
+		//创建
+		window.onload=function(){
+			var btn=document.getElementsByTagName("input")[0];
+			var div=document.getElementsByTagName("div")[0];
+			
+			btn.onclick=function(){
+				var obj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+				obj.open("get","ajax.xml");
+		        obj.send();
+				obj.onload=function(){
+					var content=obj.responseXML;
+//					div.innerHTML=content;
+                    var stus=content.getElementsByTagName("student");
+                    var str="<table><tr><td>姓名</td><td>年龄</td><td>性别</td></tr>";
+                    var str="<table>";
+   						str+="<tr><td>姓名</td><td>年龄</td><td>性别</td></tr>";
+   						for(var i=0;i<stus.length;i++){
+   							str+="<tr>";
+	 						str+="<td>"+stus[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+	 						str+="<td>"+stus[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+	 						str+="<td>"+stus[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+	 						str+="</tr>";
+   						}
+ 						str+="</table>";
+   						document.body.innerHTML=str;
+					
+				}
+				
+
+//              obj.open("post","ajax.php");
+//              obj.setRequestHeader("content-Type","application/x-www-form-urlencoded");
+//		        obj.send("name=sulin&sex=nv");
+			}
+		}
+		
+		
+	
+		
+	</script>
+</html>

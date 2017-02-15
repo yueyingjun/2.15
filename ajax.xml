@@ -1,0 +1,27 @@
+
+<?xml version="1.0" encoding='utf-8'?>;
+<school>
+	 <student>
+	 	   <name>小明</name>
+	 	   <age>23</age>
+	 	   <sex>男</sex>
+	 </student>
+	 <student>
+	 	   <name>小白</name>
+	 	   <age>23</age>
+	 	   <sex>男</sex>
+	 </student>
+	 <student>
+	 	   <name>小黑</name>
+	 	   <age>23</age>
+	 	   <sex>男</sex>
+	 </student>
+	 <student>
+	 	   <name>小高</name>
+	 	   <age>23</age>
+	 	   <sex>男</sex>
+	 </student>
+	
+</school>
+
+

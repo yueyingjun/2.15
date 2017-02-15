@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+ <html>
+ 	<head>
+ 		<meta charset="UTF-8">
+ 		<title>检测ajax.js</title>
+ 		<script src="ajax.js"></script>
+ 	</head>
+ 	<style>
+ 		div{
+ 			width: 200px;
+ 			height: 200px;
+ 			background:red;
+ 		}
+ 	</style>
+ 	<body>
+ 		<div></div>
+ 	</body>
+ </html>
+ <script>
+ 	window.onload=function(){
+ 	    var div=document.getElementsByTagName('div')[0];
+ 		div.onclick=function(){
+ 			ajax({
+ 				method:"get",
+ 				url:"11.php",
+				data:"aa=bb&cc=dd",
+ 				dataType:"text",
+ 				success:function(obj){
+ 					console.log(obj);
+ 				}
+ 			})
+ 		}
+ 	}
+ 	
+ </script>
