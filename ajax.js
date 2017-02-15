@@ -1,6 +1,6 @@
 /* ajax封装
  * @param  {object} obj
- * //包含以下内容
+ * //obj包含以下内容
  * obj.url链接地址          *
  * obj.methodget获取方式    *
  * obj.data数据
@@ -12,7 +12,7 @@
  	var method=obj.methodget;
  	var url=obj.url;
  	var success=obj.success;
- 	var data=;
+ 	var data;
  	switch(typeof data){
  		case undefined ;
  		break;
