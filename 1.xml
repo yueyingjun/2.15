@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<stu>
+		<name>赵一</name>
+		<age>12</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>钱二</name>
+		<age>13</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>孙三</name>
+		<age>14</age>
+		<sex>女</sex>
+	</stu>
+	<stu>
+		<name>李四</name>
+		<age>13</age>
+		<sex>女</sex>
+	</stu>
+	<stu>
+		<name>王五</name>
+		<age>17</age>
+		<sex>男</sex>
+	</stu>
+</root>
