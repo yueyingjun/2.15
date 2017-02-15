@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="ajax.js"></script>
+	<style>
+		div{
+			width:200px;
+			height: 200px;
+			border: 2px solid red;
+		}
+		th,td{
+			padding: 5px 20px;
+			text-align: center;
+			border:1px solid red;
+		}
+	</style>
+	<body>
+		<div></div>
+	</body>
+	<script type="text/javascript">
+		var box=document.getElementsByTagName("div")[0];
+		box.onclick=function(){
+			ajax({
+				url:"a.php",
+				type:"post",
+				asynch:true,
+				data:"name=zhangsan",
+				dataType:"document",
+				success:function(text){
+					console.log(text.getElementsByTagName('h1')[0].innerHTML);
+				}
+			})
+		}
+	</script>
+	<!--<script type="text/javascript">
+		var box=document.getElementsByTagName("div")[0];
+		box.onclick=function(){
+			var ajax=new window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+			ajax.open("get","a.php?name=zhangsan",true);
+			ajax.responseType="document";
+//			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			ajax.send();
+			ajax.onreadystatechange=function(){
+				if(ajax.readyState==4){
+					if(ajax.status==200){
+						var text=ajax.response;
+						var h1=text.getElementsByTagName('div')[0];
+						document.body.appendChild(h1);
+//						var content=ajax.responseXML;
+//						var stu=content.getElementsByTagName('stu');
+//						var str="<table>";
+//						str+="<tr><td>名字</td><td>年龄</td><td>性别</td></tr>";
+//						for(var i=0;i<stu.length;i++){
+//							var name=stu[i].getElementsByTagName('name');
+//							var age=stu[i].getElementsByTagName('age');
+//							var sex=stu[i].getElementsByTagName('sex');
+//							var arr=[name[0].innerHTML,age[0].innerHTML,sex[0].innerHTML];
+//							str+="<tr>";
+//							for(var j=0;j<arr.length;j++){
+//								str+="<td>";
+//								str+=arr[j];
+//								str+="</td>";
+//							}
+//							str+="</tr>";
+//						}
+//						str+="</table>";
+//						document.body.innerHTML=str;
+					}
+				}
+			}
+		}
+	</script>-->
+</html>

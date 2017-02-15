@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf8'?>
+<class>
+	<stu>
+		<name>活波杨</name>
+		<age>18</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>张克</name>
+		<age>18</age>
+		<sex>女</sex>
+	</stu>
+	<stu>
+		<name>离开</name>
+		<age>22</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>刘俊杰</name>
+		<age>20</age>
+		<sex>男</sex>
+	</stu>
+</class>
