@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    .div1{
+        width: 400px;height: 400px;
+        border: 1px solid #000;
+    }
+    </style>
+    <script>
+       // ; 和 回车 是 耦合 代表一行命令的结束
+        window.onload=function () {
+            var btn=document.getElementsByTagName("input")[0];
+            var div=document.getElementsByTagName("div")[0];
+            btn.onclick=function () {
+                var xmlobj=new XMLHttpRequest();
+                xmlobj.onload=function () {
+                    div.innerHTML=xmlobj.response;
+                }
+                //get传递方式
+                    //xmlobj.open("post","1.php?name=zhangsan");
+                    //xmlobj.send();
+                //post传递方式
+                xmlobj.open("post","1.xml");
+                //设置头信息
+                xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=gb2312");
+                xmlobj.send();
+                //设置接受  AJAX
+                //AJAX
+                //XML
+
+                //最后一个就是XML是鼻祖
+                // 1.是一种夸平台、夸语言的一门语言
+                //2.通过标签来接受数据
+                //3.html是XML的扩展
+                //
+                /*在XML中
+                *   只能有一个根元素
+                *   可以自己去定义
+                *   必须以英文字母开头
+                *   xmlobj.responseType="json"
+                *                       document
+                *                       arraybuffer
+                *                       text  文本
+                *                       bolb  二进制
+                 */
+            }
+
+        }
+        /*
+        * 锚连接在本页面进行跳转 默认是有2*32次方的端口
+        *xml
+        **/
+    </script>
+</head>
+<body>
+    <div class="div1"></div>
+    <input type="button" value="按钮">
+</body>
+</html>
