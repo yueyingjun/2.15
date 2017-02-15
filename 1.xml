@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<stu>
+		<name>张三</name>
+		<sex>男</sex>
+		<age>23</age>
+	</stu>
+	<stu>
+		<name>李四</name>
+		<sex>男</sex>
+		<age>23</age>
+	</stu>
+	<stu>
+		<name>王五</name>
+		<sex>男</sex>
+		<age>23</age>
+	</stu>
+	<stu>
+		<name>赵六</name>
+		<sex>男</sex>
+		<age>23</age>
+	</stu>
+</root>
