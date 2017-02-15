@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div style="width: 100px;height: 100px;border: 1px solid red;"></div>
+		<input type="button" name="" id="" value="" />
+	</body>
+	<script type="text/javascript">
+		var box=document.getElementsByTagName("div")[0];
+		var btn=document.getElementsByTagName("input")[0];
+		function ajax(obj){
+			var method=obj.method||"get";
+			var url=obj.url;
+			var data="";
+			var dataType=obj.dataType||"text";
+			var asynch=undefined?true:obj.asynch;
+			var success=obj.success;
+			//检测数据类型并存储
+			switch(typeof(obj.data)){
+				case "undefined":
+					break;
+					
+				case "string":
+					data=obj.data;
+					break;
+					
+				case "object":
+					for(var i in obj.data){
+						data+=i+"="+obj.data[i]+"&";
+					}
+					data=data.slice(0,-1);
+					break;
+			}
+			
+			//创建ajax对象
+			var ajaxobj=window.XMLHttpRequest?new XMLHttpRequest():ActiveXObject("Microsoft.XMLHTTP");
+			//判断传输方式
+			if(method=="get"){
+				ajaxobj.open("get",url+"?"+data,asynch);
+				ajaxobj.send(null);
+			}else if(method=="post"){
+				ajaxobj.open("post",url,asynch);
+				ajaxobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+				ajaxobj.send(data);
+			}
+			ajaxobj.onreadystatechange=function(){
+				var result;
+				if(ajaxobj.readyState==4){
+					if(ajaxobj.status==200){
+						if(dataType=="text"){
+							result=ajaxobj.responseText
+						}
+						if(dataType=="json"){
+							result=eval("("+ajax.response+")");
+						}
+						if(dataType=="xml"){
+							result=ajaxobj.responseXML;
+						}
+						if(success){
+							success(result);
+						}
+						alert("yes")
+		//				if(dataType=="document"){
+		//					result=ajaxobj.responseXML;
+		//				}
+		//				if(dataType=="bolb"){
+		//					result=ajaxobj.responseXML;
+		//				}
+		//				if(dataType=="arraybuffer"){
+		//					result=ajaxobj.responseXML;
+		//				}
+					}else if(ajaxobj.status==404){
+						alert("页面未找到");
+					}else{
+						alert("加载错误");
+					}
+				}
+			}
+		}
+		
+		btn.onclick=function(){
+			ajax({
+				url:"1.php",
+				method:"get",
+		 		data:{name:"houkai",age:18},
+		 		dataType:"text",
+				asynch:true
+			})
+		}
+	</script>
+</html>

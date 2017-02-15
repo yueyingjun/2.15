@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	
+	
+	<body>
+		<div style="width: 100px;height: 100px;border: 1px solid red;"></div>
+		<input type="button" name="" id="" value="" />
+	</body>
+	<script type="text/javascript">
+			var box=document.getElementsByTagName("div")[0];
+			var btn=document.getElementsByTagName("input")[0];
+			btn.onclick=function(){
+				var obj=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP")
+				obj.onreadystatechange=function(){
+					if(obj.readyState==4){//服务器接收请求成功
+						if(obj.status==200){//获取服务器端的数据成功
+							var content=obj.responseXML;//返回数据转化为XML格式
+							var strs=content.getElementsByTagName("str"); //获取str标签
+							var len=strs.length;//标签长度决定循环次数
+							var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";//innerHTML
+							for(var i=0;i<len;i++){
+								str+="<tr>";
+									str+="<td>"+content.getElementsByTagName("name")[i].innerHTML+"</td>";//获取xml格式标签中数据
+									str+="<td>"+content.getElementsByTagName("age")[i].innerHTML+"</td>";
+									str+="<td>"+content.getElementsByTagName("sex")[i].innerHTML+"</td>";
+								str+="</tr>";
+							}
+							str+="<table>";
+							box.innerHTML=str;
+						}
+					}
+				}
+				obj.open("get","1.xml")
+				obj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				obj.send();//post传输方式
+			}
+	</script>
+</html>
