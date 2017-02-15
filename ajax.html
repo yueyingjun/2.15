@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		div{
+			width: 300px;
+			height: 300px;
+			border: 1px solid red;
+		}
+	</style>
+	<body>
+		<div>
+			
+		</div>
+		<input type="button" value="按钮"/>
+	</body>
+	<script type="text/javascript">
+	    var div=document.getElementsByTagName("div")[0];
+	    var btn=document.getElementsByTagName("input")[0];
+
+		btn.onclick=function(){
+		var xlobj=new XMLHttpRequest();
+			xlobj.onreadystatechange=function(){
+			if (xlobj.readyState==4) {
+				if(xlobj.status==200){
+					var xxxxml=xlobj.responseXML;
+					var stu=xxxxml.getElementsByTagName("stu");
+					var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>"
+					for (var i=0;i<stu.length;i++) {
+						
+						str+="<tr>";
+						str+="<td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+						str+="<td>"+stu[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+						str+="<td>"+stu[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+						str+="</tr>";
+					}
+					str+="</table>";
+					div.innerHTML=str;
+				}
+			} 
+		}
+		xlobj.open("POST","1.xml");
+		xlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		xlobj.send();
+		}
+		
+		
+	</script>
+</html>
