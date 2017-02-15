@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="ajax.js"></script>
+	</head>
+	<body>
+		<div style="width:300px;height:300px;border:1px solid red;"></div>
+		<input type="button" value="按钮"/>
+	</body>
+	<script>
+		var btn=document.getElementsByTagName("input")[0];
+		btn.onclick=function(){
+			ajax({
+				method:"get",
+				url:"2.php",
+				data:'{"name":"zhangsan"}',
+				datatype:"json",
+				success:function(text){
+					console.log(text);
+				}
+			})
+		}
+	</script>
+</html>

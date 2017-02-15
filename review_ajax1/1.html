@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div style="width:300px;height:300px;border:1px solid red;"></div>
+		<input type="button" value="按钮"/>
+	</body>
+	<script>
+		//取元素
+		var divs=document.getElementsByTagName("div")[0];
+		var btn=document.getElementsByTagName("input")[0];
+		//1.获取XMLHttpRequest对象
+		var ajax=new XMLHttpRequest();
+		btn.onclick=function(){
+			//2.监测
+			ajax.onload=function(){
+				//将取回的xml信息保存
+				var xml=ajax.responseXML;
+				//取xml中的stu标签
+				var stu=xml.getElementsByTagName("stu");
+				//创建表头
+				var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+				//循环stu把tr、td的内容添加进去
+				for(var i=0;i<stu.length;i++){
+					str+="<tr>"
+						//取每个stu里的name、age、sex
+						str+="<td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+						str+="<td>"+stu[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+						str+="<td>"+stu[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+					str+="</tr>";
+				}
+				str+="</table>"
+				document.body.innerHTML=str;
+			}
+			//3.打开请求
+			ajax.open("post","1.xml");
+			//4.设置头部信息
+			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			//5.发送请求
+			ajax.send("name=zhangsan");
+		}
+	</script>
+</html>
