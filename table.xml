@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<stu>
+		<name>周小豪</name>
+		<age>5</age>
+		<sex>女</sex>
+	</stu>
+	<stu>
+		<name>张小明</name>
+		<age>10</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>郭小鑫</name>
+		<age>15</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>关小键</name>
+		<age>20</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>杰少爷</name>
+		<age>23</age>
+		<sex>男</sex>
+	</stu>
+</root>
