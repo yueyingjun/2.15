@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<script>
+	/*http://baidu.com:80/aa/bb/case.html?name=zhangsan$age=12&sex=man*/  //端口是80
+</script>
+<style type="text/css">
+	div{
+		width: 600px;
+		height: 600px;
+		border: 1px solid #000;
+	}
+</style>
+<body>
+	<div></div>
+	<input type="button" value="按钮"/>
+</body>
+<script type="text/javascript">
+	var xmlobj=new XMLHttpRequest();
+	var btn=document.getElementsByTagName("input")[0];
+	var div=document.getElementsByTagName("div")[0];
+		btn.onclick=function(){		
+			xmlobj.onload=function(){
+				var content=xmlobj.responseXML;
+				var stu=content.getElementsByTagName("stu");
+
+				var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>"
+					for (var i = 0; i < stu.length; i++) {
+						var name=stu[i].getElementsByTagName("name")[0];
+						var age=stu[i].getElementsByTagName("age")[0];
+						var sex=stu[i].getElementsByTagName("sex")[0];
+						console.log(name)
+						str+="<tr>"
+							str+="<td>"+name.innerHTML+"</td>"
+							str+="<td>"+age.innerHTML+"</td>"
+							str+="<td>"+sex.innerHTML+"</td>"
+						str+="</tr>"
+						
+					}
+				str+="</table>"
+				div.innerHTML=str
+			}	
+			xmlobj.open("post","1.xml");
+			xmlobj.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+			xmlobj.send();
+		}
+		
+</script>
+</html>
