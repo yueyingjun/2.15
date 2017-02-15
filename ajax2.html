@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		div{
+			width: 200px;
+			height: 200px;
+			border:1px solid #f00;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<input type="button" value="提交">
+</body>
+<script>	
+	function ajax(obj){
+		var mathod=obj.mathod||"get";
+		var url=obj.url;
+		var asynch=obj.asynch=undefined?true:obj.asynch;
+		var data="";
+		var datatype=obj.datatype||"text";
+		var success=obj.success;
+		switch(typeof(obj.data)){
+			case "undefined":
+				return;
+			break;
+			case "object":
+				for(var i in obj.data){
+					data+=i+"="+obj.data[i]+"&";
+				}
+				data=data.slice(0,-1);
+			break;
+			case "string":
+				data=obj.data;
+			break;
+		}
+		var ajax=new XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+		if(mathod=="get"){
+			ajax.open("get",url+"?"+data,asynch);
+			ajax.send(null);
+
+		}else if(method=="post"){
+			ajax.open("post",asynch);
+			ajax.setRuestHeader("Content-Type","application/x-www-form-urlencoded");
+			ajax.send(data);
+		}
+		ajax.onreadystatechange=function(){
+			if(ajax.readyState==4){
+				if(ajax.status==200){
+					var result;
+					switch(datatype){
+						case "text":
+						result=ajax.reponseText;
+						break;
+						case "json":
+						result=eval("("+ajax.response+")");
+						break;
+						case "xml":
+						result=ajax.responseXML;
+						break;
+						case "document":
+						result=ajax.response;
+						break;
+					}
+					if(success){
+						success(result);
+					}
+				}else{
+					ajax.error();
+				}
+			}
+		}
+	}
+
+	var div=document.getElementsByTagName("div")[0];
+	var btn=document.getElementsByTagName("input")[0];
+	window.onload=function(){
+		btn.onclick=function(){
+			ajax({
+				mathod:"get",
+				url:"ajax1.php",
+				asynch:true,
+				datatype:"json",
+				data:"",
+				success:function(result){
+					console.log(result)
+
+				}
+			})
+		}
+	}	
+</script>
+</html>
