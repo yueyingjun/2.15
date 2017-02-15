@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		div{
+			width:200px;
+			height: 200px;
+			border: 2px solid red;
+		}
+		th,td{
+			padding: 5px 20px;
+			text-align: center;
+			border:1px solid red;
+		}
+	</style>
+	<body>
+		<div></div>
+	</body>
+	<script type="text/javascript">
+		var box=document.getElementsByTagName("div")[0];
+		box.onclick=function(){
+			var ajax=new window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+			ajax.open("get","a.xml",true);
+			ajax.responseType="document";
+//			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			ajax.send();
+			ajax.onreadystatechange=function(){
+				if(ajax.readyState==4){
+					if(ajax.status==200){
+						var content=ajax.responseXML;
+						var stu=content.getElementsByTagName('stu');
+						var str="<table>";
+						str+="<tr><th>名字</th><th>年龄</th><th>性别</th></tr>";
+						for(var i=0;i<stu.length;i++){
+							var name=stu[i].getElementsByTagName('name');
+							var age=stu[i].getElementsByTagName('age');
+							var sex=stu[i].getElementsByTagName('sex');
+							var arr=[name[0].innerHTML,age[0].innerHTML,sex[0].innerHTML];
+							str+="<tr>";
+							for(var j=0;j<arr.length;j++){
+								str+="<td>";
+								str+=arr[j];
+								str+="</td>";
+							}
+							str+="</tr>";
+						}
+						str+="</table>";
+						document.body.innerHTML=str;
+					}
+				}
+			}
+		}
+	</script>
+</html>
