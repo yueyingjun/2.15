@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script>
+		window.onload=function(){
+			var btn=document.getElementsByTagName("input")[0];
+			var div=document.getElementsByTagName("div")[0];
+			btn.onclick=function(){
+				var xmlobj=new XMLHttpRequest();
+				xmlobj.onload=function(){
+				
+				var xml=xmlobj.responseXML;
+				var str=xml.getElementsByTagName("stu");
+				
+				
+				var trs="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+					for(var i=0;i<str.length;i++){
+					trs+="<tr>";
+					trs+="<td>"+str[i].getElementsByTagName("name")[0].innerHTML+"</td>";
+					trs+="<td>"+str[i].getElementsByTagName("age")[0].innerHTML+"</td>";
+					trs+="<td>"+str[i].getElementsByTagName("sex")[0].innerHTML+"</td>";
+					trs+="</tr>";
+					}
+				
+				trs+="</table>";
+				document.body.innerHTML=trs;
+				};
+				
+				
+//				xmlobj.open("get","1.php?name=zhangsan&age=12&sex=man");
+//				xmlobj.send();
+
+				xmlobj.open("post","1.xml");
+//				xmlobj.responseType="json";
+				xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+				xmlobj.send("name=zhangsan&age=12&sex=man");
+			}
+			
+		
+		};
+		
+		
+		
+		
+		
+		
+	</script>
+	<style>
+		div{
+			width: 300px;height: 300px;border: 1px solid #000;
+		}
+	</style>
+	<body>
+		<div></div>
+		<input type="button" value="按钮"/>
+	</body>
+</html>
