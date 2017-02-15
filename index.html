@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 200px;
+				height: 100px;
+				border: 1px solid orangered;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			
+		</div>
+		<input type="button" name="button" id="button" value="提交" />
+	</body>
+	<script type="text/javascript">
+//	get方式 
+//		var ajax=new XMLHttpRequest();
+//		var div=document.getElementsByTagName("div")[0]
+//		var btn=document.getElementsByTagName("input")[0]
+//		btn.onclick=function(){
+//		ajax.onreadystatechange=function(){
+//			if(ajax.readyState==4){
+//				if(ajax.status==200){
+//					div.innerHTML=ajax.response
+//				}
+//			}
+//		}
+//	    ajax.open("get","lx.php?name=gys&sex=man")
+//	    ajax.send()
+//	    }
+//	post方式	
+//var ajax=new XMLHttpRequest();
+//		var div=document.getElementsByTagName("div")[0]
+//		var btn=document.getElementsByTagName("input")[0]
+//		btn.onclick=function(){
+//		ajax.onreadystatechange=function(){
+//			if(ajax.readyState==4){
+//				if(ajax.status==200){
+//					div.innerHTML=ajax.response
+//				}
+//			}
+//		}
+//	    ajax.open("post","lx.php")
+//	    ajax.setRequestHeader("content-Type","application/x-www-form-urlencoded");
+//	    ajax.send("name=gys&sex=man")
+//	    }
+//获取XML
+//var ajax=new XMLHttpRequest();
+//		var div=document.getElementsByTagName("div")[0]
+//		var btn=document.getElementsByTagName("input")[0]
+//		btn.onclick=function(){
+//		ajax.onreadystatechange=function(){
+//			if(ajax.readyState==4){
+//				if(ajax.status==200){
+//					var obj=ajax.responseXML
+//					var stu=obj.getElementsByTagName("stu")
+//					var name=obj.getElementsByTagName("name")
+//					var age=obj.getElementsByTagName("age")
+//					var sex=obj.getElementsByTagName("sex")
+//					var t="<table><th><td>姓名</td><td>年龄</td><td>性别</td></th>"
+//					for(var i=0;i<stu.length;i++){
+//						t+="<tr>"
+//						t+="<td>"+name[i].innerHTML+"</td>"
+//						t+="<td>"+age[i].innerHTML+"</td>"
+//						t+="<td>"+sex[i].innerHTML+"</td>"
+//						t+="</tr>"
+//					}   
+//				     t+="</table>"
+//					div.innerHTML=t
+//				}
+//			}
+//		}
+//	    ajax.open("post","index.xml")
+//	    ajax.setRequestHeader("content-Type","application/x-www-form-urlencoded");
+//	    ajax.send()
+//	    }
+//ajax封装
+    function ajax(obj){
+    	var url=obj.url;
+    	var type=obj.type==undefined?"get":obj.type;
+    	var data=obj.data==undefined?"":obj.data;
+    	var dataType=obj.dataType||"text";
+    	var success=obj.success;
+    	var error=obj.error;
+        if(typeof obj==="object"&&url!=undefined){
+	        var A=new XMLHttpRequest();
+	         switch(typeof data){
+	           	case "object":
+	             for(var i in data){
+				  	 data=i+"="+data[i]+"&"
+				  }
+				  data=data.slice(0,-1);
+	           	break;
+	           	case "string":
+	           	data=obj.data;
+	           	break;
+	           	case "undefined":
+	           	break;
+	           }	
+	        if(type=="get"){
+	           A.open("get",url+"?"+data)
+	           A.responseType=dataType;
+	           A.send();
+	        } else if(type=="post"){
+	        	A.open("post",url)
+	            A.responseType=dataType;
+			    A.setRequestHeader("content-Type","application/x-www-form-urlencoded");
+			    A.send(data)	
+	        }
+	    A.onreadystatechange=function(){
+	    	var jg=0;
+	    	if(A.readyState==4){
+	    		if(A.status==200){
+	    			  switch(dataType){
+					    	case "json":
+					    	jg=eval("("+A.response+")")
+					    	break;
+					    	case "text":
+					    	jg=A.responseText
+					    	break;
+					    	case "xml":
+					    	jg=A.responseXML
+					    	break;
+					    	case "document":
+					    	jg=A.response
+					    	break;
+					    }
+	    			if(success){
+	    				success(jg);
+	    			}
+	    		}else{
+	    			 jg="页面未找到"
+	    		     error(jg);
+	    		}
+	    	}
+	    }
+        }else{alert("参数有误，重新输入")}
+    }
+    ajax({
+    	url:"lx.php",
+    	dataType:"text",
+    	type:"post",
+    	data:{"name":"gys"},
+    	success:function(jg){
+    		console.log(jg)
+//                  var obj=jg
+//		            var div=document.getElementsByTagName("div")[0]
+//					var stu=obj.getElementsByTagName("stu")
+//					var name=obj.getElementsByTagName("name")
+//					var age=obj.getElementsByTagName("age")
+//					var sex=obj.getElementsByTagName("sex")
+//					var t="<table><th><td>姓名</td><td>年龄</td><td>性别</td></th>"
+//					for(var i=0;i<stu.length;i++){
+//						t+="<tr>"
+//						t+="<td>"+name[i].innerHTML+"</td>"
+//						t+="<td>"+age[i].innerHTML+"</td>"
+//						t+="<td>"+sex[i].innerHTML+"</td>"
+//						t+="</tr>"
+//					}   
+//				     t+="</table>"
+//					div.innerHTML=t
+    	},
+    	error:function(jg){
+    		alert(jg)
+    	}
+    })
+	</script>
+</html>
