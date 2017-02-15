@@ -13,7 +13,7 @@
  	var url=obj.url;
  	var success=obj.success;
  	var data="";
- 	switch(typeof data){
+ 	switch(typeof obj.data){
  		case "undefined": ;
  		break;
  		case "string":
@@ -49,7 +49,9 @@
    						result=ajax.responseXML;
    					break;
    					case "json":
-              // alert(1);
+   						result=eval("("+ajax.response+")");
+   					break;
+            case "document":
    						result=eval("("+ajax.response+")");
    					break;
    				}
