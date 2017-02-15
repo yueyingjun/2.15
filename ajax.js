@@ -9,33 +9,48 @@ function ajax(obj){//定义一个对象，因为没有顺序
 
       if(url==false){
             alert("你没写地址！");
-      }
+      };
 
 	var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
       
-      var str;
-	switch(typeof(data)){
-		case "undefined":;
-			break;
-		case "object":
-			for (var i in data){
-				str+=i+"="+data[i]+"&";
-			};
-			str=str.slice(0,-1)
-			break;
-		case "string":
-			str=data;
-			break;
-	}
+      // var str;
+	// switch(typeof(data)){
+	// 	case "undefined":;
+	// 		break;
+	// 	case "object":
+	// 		for (var i in data){
+	// 			str+=i+"="+data[i]+"&";
+	// 		};
+	// 		str=str.slice(0,-1)
+	// 		break;
+	// 	case "string":
+	// 		str=data;
+	// 		break;
+	// };
+
+      if(typeof(data)==object){
+            for (var i in data){
+                  str+=i+"="+data[i]+"&";
+            };
+            str=str.slice(0,-1)
+      }else{
+            return;
+      }
 
 	if(type=="get"){
 		ajax.open("get", url+'?'+data, asynch);
+            if(dataType=="document"){
+                  ajax.responseType="document";
+            };
             ajax.send(null);
 	}else if(type=="post"){
 		ajax.open("post", url, asynch);
+            if(dataType=="document"){
+                  ajax.responseType="document";
+            };
             ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             ajax.send(data);
-	}
+	};
 
 	ajax.onreadystatechange=function () {
             if (ajax.readyState==4){
@@ -54,15 +69,15 @@ function ajax(obj){//定义一个对象，因为没有顺序
                               case "document":
                                     result=ajax.response;
                                     break;
-            		}
+            		};
             		if(success){
             			success(result);
-            		}
+            		};
             	}else if(ajax.status==404){
             		alert("页面没有找到！");
             	}else{
             		alert("获取错误！");
-            	} 
-            }
+            	} ;
+            };
       };
-}
+};
