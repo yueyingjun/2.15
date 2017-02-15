@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	div{
+		width: 400px;
+		height: 300px;
+		margin:0 auto;
+		border:1px solid #000;
+		position: relative;
+		background: url(1.jpg)no-repeat;
+	}
+	input{
+		position: absolute;
+		bottom:20px;
+		left:45%;
+	}
+</style>
+<body>
+	设置xmlobj.responseType="json"在open（）之后
+	<div>
+		<input type="button" value="按钮">
+	</div>
+</body>
+<script>
+	window.onload=function(){
+		var btn=document.getElementsByTagName('input')[0];
+		var div=document.getElementsByTagName('div')[0];
+		console.log(btn,div);
+		btn.onclick=function(){
+			var xmlobj=new XMLHttpRequest();
+			xmlobj.onload=function(){
+				var xml=xmlobj.responseXML;
+				var stu=xml.getElementsByTagName('stu');
+				console.log(stu);
+				var trs="<table border='1' align='center'><tr><th>姓名</th><th>总分</th><th>均分</th><th>评价</th></tr>";
+					for(var i=0;i<stu.length;i++){
+						trs+="<tr>";
+						if(i%2==0){
+							trs+="<tr bgcolor='red'>"
+						}else{
+							trs+="<tr bgcolor='yellow'>"
+						}
+						trs+="<td>"+stu[i].getElementsByTagName('name')[0].innerHTML+"</td>";
+						trs+="<td>"+stu[i].getElementsByTagName('zongfen')[0].innerHTML+"</td>";
+						trs+="<td>"+stu[i].getElementsByTagName('junfen')[0].innerHTML+"</td>";
+						trs+="<td>"+stu[i].getElementsByTagName('pinjia')[0].innerHTML+"</td>";
+						trs+="</tr>"
+					}
+				trs+="</table>"
+				div.innerHTML=trs;
+			}
+			xmlobj.open("post","chengjidan.xml");
+			xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			xmlobj.send();
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,54 @@
+<?xml version ="1.0" encoding="utf-8"?>
+<all>
+	<stu>
+		<name>靖赞誉</name>
+		<zongfen>141</zongfen>
+		<junfen>23</junfen>
+		<pinjia>回家吧</pinjia>
+	</stu>
+	<stu>
+		<name>李驰</name>
+		<a href="">
+			<zongfen>100</zongfen>
+			<junfen>30</junfen>
+			<pinjia>不及格</pinjia>
+		</a>
+		
+	</stu>
+	<stu>
+		<name>增光</name>
+		<a href="">
+			<zongfen>110</zongfen>
+			<junfen>40</junfen>
+			<pinjia>差</pinjia>
+		</a>
+		
+	</stu>
+	<stu>
+		<name>小虎</name>
+		<a href="">
+			<zongfen>114</zongfen>
+			<junfen>42</junfen>
+			<pinjia>差</pinjia>
+		</a>
+		
+	</stu>
+	<stu>
+		<name>腾飞</name>
+		<a href="">
+			<zongfen>150</zongfen>
+			<junfen>47</junfen>
+			<pinjia>差</pinjia>
+		</a>
+		
+	</stu>
+	<stu>
+		<name>马云</name>
+		<a href="">
+			<zongfen>154</zongfen>
+			<junfen>51</junfen>
+			<pinjia>差</pinjia>
+		</a>
+		
+	</stu>
+</all>
