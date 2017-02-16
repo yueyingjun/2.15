@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        1.  到什么地方去取数据
+//        2.取得方式
+//        3.渠道的数据的类型
+//        4.如何对数据来做处理 回调函数
+//        5.如何做容错处理
+//        6.我们是不是要异步
+//
+//        parma   object
+//            url str[url]    请求的地址
+//            type    str[post,get]   要请求的方式
+//            dataType    str[json,text,xml,document] 返回数据类型
+       window.onload=function () {
+           ajax({
+               url:"1.php",
+               dataType:"json",
+               success:function(data){
+                   var str="";
+                   for(var i=0;i<data.length;i++){
+                       str+="<tr>";
+                       str+="<td>"+data[i].name+"</td>";
+                       str+="<td>"+data[i].age+"</td>";
+                       str+="<td>"+data[i].sex+"</td>";
+                       str+="<td>"+data[i].nianji+"</td>";
+                       str+="<td>"+data[i].class+"</td>";
+                       str+="</tr>";
+                   }
+                   tbody.innerHTML=str;
+               }
+           })
+       }
+
+    </script>
+</head>
+<body>
+<div>
+    <h5>
+
+    </h5>
+</div>
+</body>
+</html>

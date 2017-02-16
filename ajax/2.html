@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .div1{
+            width: 400px;height: 400px;
+            border: 1px solid #000;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var div=document.getElementsByTagName("div")[0];
+            var btn=document.getElementsByTagName("input")[0];
+            btn.onclick=function(){
+                var xmlobj=new XMLHttpRequest();
+                xmlobj.onload=function(){
+
+                    var content=xmlobj.responseXML;
+                    var stu=content.getElementsByTagName("stu");
+                    var str="<table>"
+                    str+="<tr><th>姓名</th><th>年龄</th><th>性别</th></tr>"
+                    for(var i=0;i<stu.length; i++){
+                        str+="<tr><td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td><td>"
+                            +stu[i].getElementsByTagName("age")[0].innerHTML+"</td><td>"
+                            +stu[i].getElementsByTagName("name")[0].innerHTML+"</td></tr>";
+                    }
+                    str+="</table>"
+                    div.innerHTML=str;
+                }
+                xmlobj.open("post","1.xml");
+                xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=gb2312");
+                xmlobj.send()
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="div1"></div>
+<input type="button" value="按钮">
+</body>
+</html>
