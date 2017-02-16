@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf8'?>
+<class>
+	<stu>
+		<name>黄月霞</name>
+		<age>30</age>
+		<sex>nosex</sex>
+	</stu>
+	<stu>
+		<name>张文娜</name>
+		<age>20</age>
+		<sex>女</sex>
+	</stu>
+	<stu>
+		<name>腾飞</name>
+		<age>13</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>靳晓虎</name>
+		<age>99</age>
+		<sex>男</sex>
+	</stu>
+</class>

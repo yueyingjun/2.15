@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		.box{
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+	<body>
+		<div class="box">
+			
+		</div>
+		<input type="button" value="按钮"/>
+	</body>
+	<script>
+		window.onload=function(){
+			var box=document.getElementsByTagName("div")[0];
+			var btn=document.getElementsByTagName("input")[0];
+			btn.onclick=function(){
+				var ajax=new XMLHttpRequest();
+				ajax.open("post","ajaxxml.xml");
+				ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				ajax.send();
+				//responseType  ==XML
+				//xml文件获取到后可通过dom的方法进行操作
+				ajax.onloadend=function(){	
+					var content=ajax.responseXML;
+					box.innerHTML=content;
+					var stu=content.getElementsByTagName("stu");
+					var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>"
+					for(var i=0;i<stu.length;i++){
+						str+="<tr><td>"+stu[i].getElementsByTagName("name")[0].innerHTML+"</td><td>"+stu[i].getElementsByTagName("age")[0].innerHTML+"<td>"+stu[i].getElementsByTagName("sex")[0].innerHTML+"</td></tr>";
+					}
+					str+="</table>";
+					document.write(str);
+				}
+			}
+		}
+	</script>
+</html>
