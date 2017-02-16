@@ -57,21 +57,26 @@
 		switch(method){
 			case "get":
 				ajax.open(method,url+"?"+data,asynch);
-				ajax.responseType=dataType;
+				//不做判断后台报错ajax.responseType类型不能是xml
+				if(dataType!=="xml"){
+					ajax.responseType=dataType;
+				}
 				ajax.send(null);
 			break;
 			case "post":
 				ajax.open(method,url,asynch);
-				ajax.responseType=dataType;
+				if(dataType!=="xml"){
+					ajax.responseType=dataType;
+				}
 				ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 				ajax.send(data);
 			break;
 		}
-		//datatype类型
+		//监听		
 		ajax.onreadystatechange=function(){
 				if(ajax.readyState==4){
 					if(ajax.status==200){
-						//成功
+						//datatype类型						
 						if(dataType==="xml"){
 							var result=ajax.responseXML;
 						}else{
