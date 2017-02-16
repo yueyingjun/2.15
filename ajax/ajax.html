@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<script src="ajax.js"></script>
+	<style>
+		div{width:200px;height: 200px;border:1px solid #000}
+	</style>
+</head>
+<body>
+	<!--<input type="file">--> 
+		<div></div>
+		<input type="button" value="按钮" />
+</body>
+<script>
+//1.获取xmlhttprequrst 对象 
+// new XMLHttpRequest();  new ActiveXObject("Microsoft.XMLHTTP")
+//var ajax=window.XMLHttpRequest? new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+/*ajax.onreadystatechange=function(){
+	if(ajax.readyState==4){
+		if(ajax.status==200){
+			console.log(ajax.responseText);
+		}
+	}
+}*/
+//ajax.onload=function(){
+//	console.log(ajax.responseText);
+//}
+//ajax.open("get","ajax1.html");
+//ajax.send();
+
+var div=document.getElementsByTagName("div")[0];
+var btn=document.getElementsByTagName("input")[0];
+
+
+btn.onclick=function(){
+//	var ajax=window.XMLHttpRequest? new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+//ajax.onload=function(){
+//div.innerHTML=ajax.response;	
+//}
+
+ajax({
+	url:"ajax.php",
+	dataType:"document",
+	success:function(result){
+		console.log(result);
+	}
+})
+
+
+
+/*ajax.open("get","ajax.php?name=zhangsan&pass=12345");
+ajax.send();*/
+
+//ajax.open("post","ajax.php");
+//ajax.responseType="text";
+//ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+//ajax.send("name=zhangsan&pass=12345");
+}
+</script>
+</html>
