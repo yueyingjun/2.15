@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<stu>
+		<name>哈哈哈</name>
+		<age>1</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>哈哈哈哈</name>
+		<age>2</age>
+		<sex>男</sex>
+	</stu>
+	<stu>
+		<name>哈哈哈哈啊哈</name>
+		<age>3</age>
+		<sex>女</sex>
+	</stu>
+	<stu>
+		<name>哈哈哈哈啊哈哈哈哈</name>
+		<age>4</age>
+		<sex>男</sex>
+	</stu>
+</root>
