@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		div{
+			width:200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+	<body>
+		<div></div>
+		<input type="button" value="提交"/>
+	</body>
+	<script>
+//格式
+// ajax{
+	// method:str[get/post],要请求的方式
+	// url:str[url],要请求的地址
+	// data:{aa:bb,cc:dd}/"aa=bb&cc=dd", str[] json{}  json格式不存在字符串变量相连，工作更便捷，减少出错几率
+	// dataType:str["text"/"json"/"xml"/"document"],返回数据的类型
+	// asynch:bool[true/false],ajax异步或同步
+	// success: fn[callback] callback(e) e是获取到的数据
+	//error:fn[callback] callback(status,mes) status错误,mes错误信息
+// }
+
+	function ajax(obj){
+		//没传对象类型，要报错
+		if(typeof(obj)!=="object"){
+			console.error("请传入正确的参数");//  控制台有报错行
+			return false;//停止执行代码，并返回false
+		}
+		//没传地址要报错
+		var url=obj.url;
+		if(url===undefined){
+			console.error("没传地址");
+			return false;
+		}
+		var method=obj.method||"get";
+		var data=obj.data||"";
+		//判断data的类型，是字符串不用处理
+		if(typeof data==="object"){
+			var str="";
+			for(var i in data){
+				str+=i+"="+data[i]+"&";
+			}
+			data=str.slice(0,-1);
+		}
+		var dataType=obj.dataType||"text";
+		var asynch=obj.asynch===undefined?true:obj.asynch;
+		//ajax创建兼容 获取对象
+		var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+		//method类型
+		switch(method){
+			case "get":
+				ajax.open(method,url+"?"+data,asynch);
+				ajax.responseType=dataType;
+				ajax.send(null);
+			break;
+			case "post":
+				ajax.open(method,url,asynch);
+				ajax.responseType=dataType;
+				ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				ajax.send(data);
+			break;
+		}
+		//datatype类型
+		ajax.onreadystatechange=function(){
+				if(ajax.readyState==4){
+					if(ajax.status==200){
+						//成功
+						if(dataType==="xml"){
+							var result=ajax.responseXML;
+						}else{
+							var result=ajax.response;
+						}
+						//判断有没有成功的回调函数，有再返回结果
+						if(obj.success){
+							obj.success(result);
+						}
+					}else if(ajax.status==404){
+						var status=ajax.status;
+						var mes="雾霾太大，找不到页面T0T";
+						if(obj.error){
+							obj.error(status,mes);
+						}
+					}else{
+						var status=ajax.status;
+						var mes="服务器发生了错误~不赖我";
+						if(obj.error){
+							obj.error(status,mes);
+						}
+					}
+				}
+		}	
+	}
+	var box=document.getElementsByTagName("div")[0];
+	var btn=document.getElementsByTagName("input")[0];
+	btn.onclick=function(){
+		ajax({
+			method:"post",
+			url:"one.php",
+	 		data:{name:"hi",age:90},
+	 		dataType:"document",
+			asynch:true,
+			success:function(e){
+//				console.log(e.getElementsByTagName("h1")[0].innerHTML);
+				console.log(e);
+	 		},
+			error:function(status,mes){
+				console.log(status,mes);
+			}
+		})
+	}
+	
+
+	</script>
+</html>
