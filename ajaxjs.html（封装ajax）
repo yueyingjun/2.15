@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+		<style>
+			.box{
+				width:200px;
+				height: 200px;
+				background: yellow;
+				
+			}
+		</style>
+	<body>
+		<div class="box"></div>
+		<input type="button" name="" id="" value="按钮" />
+	</body>
+<script>
+window.onload=function(){ 
+var btn=document.getElementsByTagName("input")[0];
+btn.onclick=function(){ 
+	 ajax({
+	    url:"log.php",
+	    method:"get",
+	    asynch:true,
+	    data:{"name":"zhangsan"},
+	    dataType:"json",
+	    success:function(con){
+	    	console.log(con);
+	    },error:function(){
+	    	alert("接收失败");
+	    }
+	  }) 
+ } 
+}
+  
+  function ajax(obj){
+  	//url str(url)                                      请求的地址
+  	//method str("get"/"post")                          请求的方式
+  	//data   object()                                   传送的数据
+  	//dataType   str("text"/"xml"/"document"/"json")    接收的数据类型
+  	//async   true/false                                是否异步
+//  初始化
+    var method=obj.method||"get";
+	var url=obj.url;
+	var data=obj.data;
+	var asynch=obj.asynch==undefined?true:obj.asynch;
+	var dataType=obj.dataType||"text";
+	var success=obj.success;
+//容错
+  	if(url===undefined){
+  		console.log("请输入有效的地址！")
+  		return;
+  	}
+  	if(typeof data!="object"){
+  		console.log("请输入正确的数据格式")
+  		return;
+  	}else{
+         for(var i in data){
+		    data+=i+"="+obj.data[i]+"&";				                
+		 }
+		   data=data.slice(0,-1);  		
+  	}
+    var ajax=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP"); 	
+//两种方式
+	if(method=="get"){
+		ajax.open("get",url+"?"+data,asynch);
+		ajax.send();
+        ajax.responseType=dataType;
+	}else if(method=="post"){
+		ajax.open("post",url,asynch);		
+		ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		ajax.send(data);
+        ajax.responseType=dataType;		
+	}	
+//颗粒化控制
+  	ajax.onreadystatechange=function(){
+  		if(ajax.readyState==4){
+  		   if(ajax.status==200){
+                    var result;
+                    if(dataType=="xml"){
+            	       result=ajax.responseXML;
+                    }else{
+            	         result=ajax.response;
+                    }
+  		    if(success){
+  			  success(result);
+  		     }
+  		   }else if(ajax.status==404){
+  			alert("页面未找到")
+  		   }else{
+  			alert("请求错误")  				
+  		   }
+  		}
+  	}
+  	
+  	
+  	
+  }
+  
+		
+		
+		
+</script>
+	
+	
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>表</title>
+		
+		<style>
+			.box{
+				width:200px;
+				height: 200px;
+				background: yellow;
+				
+			}
+		</style>
+	</head>
+	<body>
+		111
+		<div class="box"></div>
+		<input type="button" name="" id="" value="按钮" />
+	</body>
+	<script type="text/javascript">
+		var btn=document.getElementsByTagName("input")[0];
+		var div=document.getElementsByClassName("box")[0];
+         btn.onclick=function(){
+         	var xmlobj=new XMLHttpRequest();
+         	xmlobj.onload=function(){
+         		var content=xmlobj.responseXML;
+         		var strs=content.getElementsByTagName("str");
+         		var str="<table><tr><th>姓名</th><th>年龄</th><th>性别</th></tr>";
+         		for (var i=0;i<strs.length;i++){         	         			
+         				str+="<tr>";
+         				str+="<td>"+content.getElementsByTagName("name")[i].innerHTML+"</td>";
+         				str+="<td>"+content.getElementsByTagName("age")[i].innerHTML+"</td>";
+         				str+="<td>"+content.getElementsByTagName("sex")[i].innerHTML+"</td>";         				
+         				str+="</tr>";       						
+         		}
+         		str+="</table>";
+                div.innerHTML=str;       		     		
+         	}
+        xmlobj.open("post","ajax.xml");
+        xmlobj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xmlobj.send();	
+         }
+
+
+
+
+
+
+
+
+	</script>
+</html>
